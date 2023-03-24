@@ -8,20 +8,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
-public class App extends Application {
-
+public class Dashboard extends Application {
   private static Scene scene;
 
   @Override
   public void start(Stage stage) throws IOException {
-    scene = new Scene(loadFXML("layout"));
-    scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+    scene = new Scene(loadFXML("dashboard"), 800, 600);
+    String css = getClass().getResource("styles.css").toExternalForm();
+    scene.getStylesheets().add(css);
     stage.setScene(scene);
     stage.setTitle("StockMaster");
-    stage.isMaximized();
+    // stage.setMaximized(true);
     stage.show();
   }
 

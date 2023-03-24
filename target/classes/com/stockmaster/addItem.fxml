@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+
+<StackPane xmlns="http://javafx.com/javafx/19"
+  xmlns:fx="http://javafx.com/fxml/1" styleClass="shadow" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+  <VBox alignment="CENTER" fillWidth="false" styleClass="shadow" stylesheets="@styles.css" StackPane.alignment="TOP_CENTER">
+    <VBox alignment="CENTER_RIGHT" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="shadow">
+      <children>
+        <GridPane hgap="10" vgap="10">
+
+          <Label text="Item Name" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="itemNameField" prefHeight="25.0" prefWidth="300.0" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+          <Label text="Category" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <ComboBox fx:id="categoryDropdown" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Fruits &amp; Vegetables" />
+                <String fx:value="Bakery" />
+                <String fx:value="Dairy" />
+                <!-- Add more categories as needed -->
+              </FXCollections>
+            </items>
+          </ComboBox>
+
+          <Label text="Unit of Measurement" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <ComboBox fx:id="unitOfMeasurementDropdown" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Kilograms" />
+                <String fx:value="Grams" />
+                <String fx:value="Liters" />
+                <String fx:value="Pieces" />
+                <!-- Add more units as needed -->
+              </FXCollections>
+            </items>
+          </ComboBox>
+
+          <Label text="Quantity" GridPane.columnIndex="0" GridPane.rowIndex="4">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="quantityField" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+          <Label text="Cost Price" GridPane.columnIndex="0" GridPane.rowIndex="5">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="costPriceField" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+          <Label text="Selling Price" GridPane.columnIndex="0" GridPane.rowIndex="6">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="sellingPriceField" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+          <Label text="Expiry Date" GridPane.columnIndex="0" GridPane.rowIndex="7">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <DatePicker fx:id="expiryDatePicker" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+          <Label text="Vendor/Supplier" GridPane.columnIndex="0" GridPane.rowIndex="8">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <ComboBox fx:id="vendorDropdown" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Vendor 1" />
+                <String fx:value="Vendor 2" />
+                <String fx:value="Vendor 3" />
+                <!-- Add more vendors as needed -->
+              </FXCollections>
+            </items>
+          </ComboBox>
+
+          <Label text="Notes/Remarks" GridPane.columnIndex="0" GridPane.rowIndex="9">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="notesField" prefWidth="300.0" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+          <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+          </rowConstraints>
+        </GridPane>
+        <Button fx:id="submitItemBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add" textFill="WHITE" />
+      </children>
+      <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+    </VBox>
+    <StackPane.margin>
+      <Insets />
+    </StackPane.margin>
+  </VBox>
+  <BorderPane.margin>
+    <Insets />
+  </BorderPane.margin>
+</StackPane>

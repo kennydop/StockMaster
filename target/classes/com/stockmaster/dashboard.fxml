@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/19"
+  xmlns:fx="http://javafx.com/fxml/1" spacing="5.0" BorderPane.alignment="TOP_LEFT">
+  <children>
+    <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="20" stylesheets="@styles.css">
+      <StackPane style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css" GridPane.rowIndex="1">
+        <VBox>
+          <children>
+            <Label prefHeight="17.0" prefWidth="200.0" stylesheets="@styles.css" text="Sales Overview">
+              <styleClass>
+                <String fx:value="text-xl" />
+                <String fx:value="bottom-border" />
+              </styleClass>
+              <VBox.margin>
+                <Insets bottom="10.0" />
+              </VBox.margin>
+            </Label>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10" prefHeight="60.0" />
+                <RowConstraints minHeight="10" prefHeight="60.0" />
+              </rowConstraints>
+              <children>
+                <VBox>
+                  <children>
+                    <Label stylesheets="@styles.css" text="Sales" />
+                    <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                  </children>
+                </VBox>
+                <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <children>
+                    <Label stylesheets="@styles.css" text="Profit" />
+                    <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                  </children>
+                </VBox>
+                <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                  <children>
+                    <Label stylesheets="@styles.css" text="Cost" />
+                    <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                  </children>
+                </VBox>
+                <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
+                  <children>
+                    <Label stylesheets="@styles.css" text="Revenue" />
+                    <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                  </children>
+                </VBox>
+              </children>
+            </GridPane>
+          </children>
+        </VBox>
+        <styleClass>
+          <String fx:value="round" />
+          <String fx:value="shadow" />
+        </styleClass>
+      </StackPane>
+      <StackPane layoutX="20.0" layoutY="20.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
+        <children>
+          <VBox>
+            <children>
+              <Label prefHeight="17.0" prefWidth="200.0" stylesheets="@styles.css" text="Purchase Overview">
+                <styleClass>
+                  <String fx:value="text-xl" />
+                  <String fx:value="bottom-border" />
+                </styleClass>
+                <VBox.margin>
+                  <Insets bottom="10.0" />
+                </VBox.margin>
+              </Label>
+              <GridPane>
+                <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                  <RowConstraints minHeight="10" prefHeight="60.0" />
+                  <RowConstraints minHeight="10" prefHeight="60.0" />
+                </rowConstraints>
+                <children>
+                  <VBox>
+                    <children>
+                      <Label stylesheets="@styles.css" text="Purchases" />
+                      <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                    </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                      <Label stylesheets="@styles.css" text="Returns" />
+                      <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                    </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                    <children>
+                      <Label stylesheets="@styles.css" text="Cost" />
+                      <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                    </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
+                    <children>
+                      <Label stylesheets="@styles.css" text="Cancelled" />
+                      <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                    </children>
+                  </VBox>
+                </children>
+              </GridPane>
+            </children>
+          </VBox>
+        </children>
+        <styleClass>
+          <String fx:value="round" />
+          <String fx:value="shadow" />
+        </styleClass>
+      </StackPane>
+      <VBox.margin>
+        <Insets bottom="15.0" />
+      </VBox.margin>
+    </HBox>
+    <StackPane prefHeight="40.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+      <styleClass>
+        <String fx:value="round" />
+        <String fx:value="shadow" />
+      </styleClass>
+      <children>
+        <Label text="Total Stock" StackPane.alignment="CENTER_LEFT" />
+        <Label layoutX="15.0" layoutY="21.0" styleClass="text-xl" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+    </StackPane>
+    <StackPane layoutX="20.0" layoutY="235.0" prefHeight="40.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+      <styleClass>
+        <String fx:value="round" />
+        <String fx:value="shadow" />
+      </styleClass>
+      <children>
+        <Label text="Low Stock Item" StackPane.alignment="CENTER_LEFT" />
+        <Label layoutX="15.0" layoutY="21.0" styleClass="text-xl" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+    </StackPane>
+    <StackPane layoutX="20.0" layoutY="236.0" prefHeight="40.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+      <styleClass>
+        <String fx:value="round" />
+        <String fx:value="shadow" />
+      </styleClass>
+      <children>
+        <Label text="High Stock Item" StackPane.alignment="CENTER_LEFT" />
+        <Label layoutX="15.0" layoutY="21.0" styleClass="text-xl" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+    </StackPane>
+    <StackPane layoutX="20.0" layoutY="281.0" prefHeight="40.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+      <styleClass>
+        <String fx:value="round" />
+        <String fx:value="shadow" />
+      </styleClass>
+      <children>
+        <Label text="Total Customers" StackPane.alignment="CENTER_LEFT" />
+        <Label layoutX="15.0" layoutY="21.0" styleClass="text-xl" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+    </StackPane>
+    <StackPane layoutX="20.0" layoutY="372.0" prefHeight="40.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+      <styleClass>
+        <String fx:value="round" />
+        <String fx:value="shadow" />
+      </styleClass>
+      <children>
+        <Label text="Total Suppliers" StackPane.alignment="CENTER_LEFT" />
+        <Label layoutX="15.0" layoutY="21.0" styleClass="text-xl" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+    </StackPane>
+  </children>
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+</VBox>
