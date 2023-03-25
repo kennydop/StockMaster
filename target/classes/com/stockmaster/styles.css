@@ -174,3 +174,8 @@
   -fx-background-color: #ea7227;
   -fx-text-fill: white;
 }
+
+.item-list-view .list-cell {
+  -fx-border-width: 0;
+  -fx-padding: 0;
+}

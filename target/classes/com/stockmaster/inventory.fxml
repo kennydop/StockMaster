@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.InventoryController">
+  <HBox>
+    <Label fx:id="headerNameLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Name">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+    <Label fx:id="headerQuantityLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Quantity">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+    <Label fx:id="headerSellingPriceLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Selling Price">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+    <Label fx:id="headerVendorLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Vendor">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+  </HBox>
+  <ListView fx:id="itemListView" styleClass="item-list-view" stylesheets="@styles.css" />
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+</VBox>

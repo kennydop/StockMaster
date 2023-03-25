@@ -60,9 +60,8 @@ public class LayoutController implements Initializable {
       addItemNode = addItemLoader.load();
 
       // load the inventory node
-      // FXMLLoader inventoryLoader = new
-      // FXMLLoader(getClass().getResource("inventory.fxml"));
-      // inventoryNode = inventoryLoader.load();
+      FXMLLoader inventoryLoader = new FXMLLoader(getClass().getResource("inventory.fxml"));
+      inventoryNode = inventoryLoader.load();
 
       // // load the addVendor node
       // FXMLLoader addVendorLoader = new
@@ -118,11 +117,11 @@ public class LayoutController implements Initializable {
       setClicked(addItemBtn);
     });
 
-    // inventoryBtn.setOnAction(event -> {
-    // rootPane.setCenter(inventoryNode);
-    // currentCenterNode = inventoryNode;
-    // setClicked(inventoryBtn);
-    // });
+    inventoryBtn.setOnAction(event -> {
+      rootPane.setCenter(inventoryNode);
+      currentCenterNode = inventoryNode;
+      setClicked(inventoryBtn);
+    });
 
     // addVendorBtn.setOnAction(event -> {
     // rootPane.setCenter(addVendorNode);
