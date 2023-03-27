@@ -99,6 +99,8 @@
 }
 .btn:pressed {
   -fx-background-color: #ed9820;
+  -fx-padding: 7 19 7 19;
+  -fx-marging: 1 2 1 2;
 }
 
 .txt-col {

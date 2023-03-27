@@ -79,10 +79,10 @@ public class LayoutController implements Initializable {
       FXMLLoader customersLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
       customersNode = customersLoader.load();
 
-      // // load the addPurchase node
-      // FXMLLoader addPurchaseLoader = new
-      // FXMLLoader(getClass().getResource("addPurchase.fxml"));
-      // addPurchaseNode = addPurchaseLoader.load();
+      // load the addPurchase node
+      FXMLLoader addPurchaseLoader = new
+      FXMLLoader(getClass().getResource("addPurchase.fxml"));
+      addPurchaseNode = addPurchaseLoader.load();
 
       // // load the sales node
       // FXMLLoader salesLoader = new
@@ -143,11 +143,11 @@ public class LayoutController implements Initializable {
       setClicked(customersBtn);
     });
 
-    // addPurchaseBtn.setOnAction(event -> {
-    // rootPane.setCenter(addPurchaseNode);
-    // currentCenterNode = addPurchaseNode;
-    // setClicked(addPurchaseBtn);
-    // });
+    addPurchaseBtn.setOnAction(event -> {
+    rootPane.setCenter(addPurchaseNode);
+    currentCenterNode = addPurchaseNode;
+    setClicked(addPurchaseBtn);
+    });
 
     // salesBtn.setOnAction(event -> {
     // rootPane.setCenter(salesNode);
