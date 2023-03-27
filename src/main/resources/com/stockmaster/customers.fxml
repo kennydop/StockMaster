@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.CustomersController">
+  <HBox>
+    <Label fx:id="headerCustomerNameLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Name">
+   </Label>
+    <Label fx:id="headerCustomerTypeLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Name">
+   </Label>
+    <Label fx:id="headerCustomerPhoneLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Phone">
+         </Label>
+    <Label fx:id="headerCustomerAddressLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Address">
+         </Label>
+    <Label fx:id="headerCustomerEmailLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Email">
+         </Label>
+  </HBox>
+  <ListView fx:id="customersListView" fixedCellSize="40.0" styleClass="item-list-view" stylesheets="@styles.css" VBox.vgrow="ALWAYS" />
+   <padding>
+      <Insets left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

@@ -72,14 +72,12 @@ public class LayoutController implements Initializable {
       vendorsNode = vendorsLoader.load();
 
       // load the addCustomer node
-      FXMLLoader addCustomerLoader = new
-      FXMLLoader(getClass().getResource("addCustomer.fxml"));
+      FXMLLoader addCustomerLoader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
       addCustomerNode = addCustomerLoader.load();
 
-      // // load the customers node
-      // FXMLLoader customersLoader = new
-      // FXMLLoader(getClass().getResource("customers.fxml"));
-      // customersNode = customersLoader.load();
+      // load the customers node
+      FXMLLoader customersLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
+      customersNode = customersLoader.load();
 
       // // load the addPurchase node
       // FXMLLoader addPurchaseLoader = new
@@ -134,16 +132,16 @@ public class LayoutController implements Initializable {
     });
 
     addCustomerBtn.setOnAction(event -> {
-    rootPane.setCenter(addCustomerNode);
-    currentCenterNode = addCustomerNode;
-    setClicked(addCustomerBtn);
+      rootPane.setCenter(addCustomerNode);
+      currentCenterNode = addCustomerNode;
+      setClicked(addCustomerBtn);
     });
 
-    // customersBtn.setOnAction(event -> {
-    // rootPane.setCenter(customersNode);
-    // currentCenterNode = customersNode;
-    // setClicked(customersBtn);
-    // });
+    customersBtn.setOnAction(event -> {
+      rootPane.setCenter(customersNode);
+      currentCenterNode = customersNode;
+      setClicked(customersBtn);
+    });
 
     // addPurchaseBtn.setOnAction(event -> {
     // rootPane.setCenter(addPurchaseNode);
