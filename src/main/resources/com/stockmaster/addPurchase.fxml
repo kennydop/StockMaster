@@ -27,7 +27,7 @@
                             <Font size="13.0" />
                         </font>
                     </Label>
-                    <DatePicker fx:id="purchaseDatePicker" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <DatePicker fx:id="purchaseDatePicker" prefWidth="300.0" styleClass="" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                     <Label text="Item ID" GridPane.columnIndex="0" GridPane.rowIndex="2">
                         <font>

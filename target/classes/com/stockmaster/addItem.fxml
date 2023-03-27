@@ -89,7 +89,7 @@
               <Font size="13.0" />
             </font>
           </Label>
-          <DatePicker fx:id="expiryDatePicker" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+          <DatePicker fx:id="expiryDatePicker" prefWidth="300.0" styleClass="" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
           <Label text="Vendor/Supplier" GridPane.columnIndex="0" GridPane.rowIndex="8">
             <font>

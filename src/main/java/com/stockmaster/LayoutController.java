@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public class LayoutController implements Initializable {
   @FXML
@@ -34,12 +31,10 @@ public class LayoutController implements Initializable {
   Button customersBtn;
   @FXML
   Button addPurchaseBtn;
-  @FXML
-  Button salesBtn;
 
   private Node currentCenterNode; // the default center node for the dashboard
-  private VBox dashboardNode;
-  private StackPane addItemNode;
+  private Node dashboardNode;
+  private Node addItemNode;
   private Node inventoryNode;
   private Node addVendorNode;
   private Node vendorsNode;
@@ -83,11 +78,6 @@ public class LayoutController implements Initializable {
       FXMLLoader addPurchaseLoader = new
       FXMLLoader(getClass().getResource("addPurchase.fxml"));
       addPurchaseNode = addPurchaseLoader.load();
-
-      // // load the sales node
-      // FXMLLoader salesLoader = new
-      // FXMLLoader(getClass().getResource("sales.fxml"));
-      // salesNode = salesLoader.load();
 
     } catch (IOException e) {
       // TODO Auto-generated catch block
@@ -149,11 +139,6 @@ public class LayoutController implements Initializable {
     setClicked(addPurchaseBtn);
     });
 
-    // salesBtn.setOnAction(event -> {
-    // rootPane.setCenter(salesNode);
-    // currentCenterNode = salesNode;
-    // setClicked(salesBtn);
-    // });
 
     Platform.runLater(() -> rootPane.requestFocus());
   }
@@ -167,7 +152,6 @@ public class LayoutController implements Initializable {
     addCustomerBtn.getStyleClass().remove("clicked");
     customersBtn.getStyleClass().remove("clicked");
     addPurchaseBtn.getStyleClass().remove("clicked");
-    salesBtn.getStyleClass().remove("clicked");
     btn.getStyleClass().add("clicked");
   }
 }

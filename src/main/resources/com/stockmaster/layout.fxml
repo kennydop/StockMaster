@@ -44,7 +44,6 @@
       <Button fx:id="addCustomerBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Customer" />
       <Button fx:id="customersBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Customers" />
       <Button fx:id="addPurchaseBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Purchase" />
-      <Button fx:id="salesBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Sales" />
     </VBox>
   </left>
 </BorderPane>
