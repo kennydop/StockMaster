@@ -36,12 +36,6 @@ public class InventoryController {
     // Set the items in the ListView
     itemListView.setItems(items);
 
-    // Set the preferred width for the header labels
-    headerNameLabel.prefWidthProperty().bind(itemListView.widthProperty().multiply(0.35));
-    headerQuantityLabel.prefWidthProperty().bind(itemListView.widthProperty().multiply(0.18));
-    headerSellingPriceLabel.prefWidthProperty().bind(itemListView.widthProperty().multiply(0.18));
-    headerVendorLabel.prefWidthProperty().bind(itemListView.widthProperty().multiply(0.29));
-
     // Set the custom cell factory for the ListView
     itemListView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
       @Override
@@ -57,6 +51,7 @@ public class InventoryController {
           HBox cellLayout = new HBox(nameLabel, quantityLabel, sellingPriceLabel, vendorLabel);
 
           {
+
             // Find the vertical scrollbar of the ListView
             ScrollBar scrollBar = (ScrollBar) itemListView.lookup(".scroll-bar:vertical");
             if (scrollBar == null) {
@@ -64,8 +59,19 @@ public class InventoryController {
               scrollBar = (ScrollBar) itemListView.lookup(".scroll-bar:vertical");
             }
 
-            // Bind the preferred width of each label, accounting for the scrollbar's width
             double scrollBarWidth = scrollBar.getWidth();
+
+            // Set the preferred width for the header labels
+            headerNameLabel.prefWidthProperty()
+                .bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.35));
+            headerQuantityLabel.prefWidthProperty()
+                .bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.18));
+            headerSellingPriceLabel.prefWidthProperty()
+                .bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.18));
+            headerVendorLabel.prefWidthProperty()
+                .bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.29));
+
+            // Bind the preferred width of each label, accounting for the scrollbar's width
             nameLabel.prefWidthProperty().bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.35));
             quantityLabel.prefWidthProperty()
                 .bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.18));
@@ -74,8 +80,8 @@ public class InventoryController {
             vendorLabel.prefWidthProperty().bind(itemListView.widthProperty().subtract(scrollBarWidth).multiply(0.29));
 
             // Set the cell layout style
-            cellLayout.setStyle(
-                "-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ea7227; -fx-border-width: 1;");
+            cellLayout.getStyleClass().add("custom-list-cell");
+
           }
 
           @Override

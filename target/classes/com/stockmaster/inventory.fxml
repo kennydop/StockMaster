@@ -6,29 +6,20 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.InventoryController">
   <HBox>
-    <Label fx:id="headerNameLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Name">
-         <font>
-            <Font size="13.0" />
-         </font></Label>
-    <Label fx:id="headerQuantityLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Quantity">
-         <font>
-            <Font size="13.0" />
-         </font></Label>
-    <Label fx:id="headerSellingPriceLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Selling Price">
-         <font>
-            <Font size="13.0" />
-         </font></Label>
-    <Label fx:id="headerVendorLabel" style="-fx-font-weight: 600;" styleClass="text-lg" stylesheets="@styles.css" text="Vendor">
-         <font>
-            <Font size="13.0" />
-         </font></Label>
+    <Label fx:id="headerNameLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Name">
+   </Label>
+    <Label fx:id="headerQuantityLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Quantity">
+         </Label>
+    <Label fx:id="headerSellingPriceLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Selling Price">
+         </Label>
+    <Label fx:id="headerVendorLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Vendor">
+         </Label>
   </HBox>
-  <ListView fx:id="itemListView" styleClass="item-list-view" stylesheets="@styles.css" />
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-  </padding>
+  <ListView fx:id="itemListView" fixedCellSize="40.0" styleClass="item-list-view" stylesheets="@styles.css" VBox.vgrow="ALWAYS" />
+   <padding>
+      <Insets left="20.0" right="20.0" top="20.0" />
+   </padding>
 </VBox>

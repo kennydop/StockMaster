@@ -21,7 +21,7 @@ public class App extends Application {
     scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
     stage.setScene(scene);
     stage.setTitle("StockMaster");
-    stage.isMaximized();
+    // stage.isMaximized();
     stage.show();
   }
 

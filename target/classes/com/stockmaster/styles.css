@@ -175,7 +175,43 @@
   -fx-text-fill: white;
 }
 
+.item-list-view {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+  }
+
 .item-list-view .list-cell {
   -fx-border-width: 0;
   -fx-padding: 0;
+}
+
+.item-list-view .list-cell:filled:selected {
+  -fx-background-color: #ea7227;
+}
+
+.item-list-view .list-cell:filled:selected:focused {
+  -fx-background-color: #ea7227;
+}
+
+.item-list-view .list-cell:filled:selected:hover {
+  -fx-background-color: #ea7227;
+}
+
+.custom-list-cell {
+  -fx-border-width: 0;
+  -fx-padding: 0;
+  -fx-height: 40;
+  -fx-alignment: center-left;
+  -fx-font-size: 1.1em;
+  -fx-font-weight: 500;
+  -fx-text-fill: #4a4a4a;
+}
+
+.text-lg-label {
+  -fx-font-size: 1.2em;
+  -fx-font-weight: 800;
+  -fx-text-fill: #4a4a4a;
+
 }
