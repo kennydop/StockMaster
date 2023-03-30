@@ -17,9 +17,9 @@
 <?import javafx.collections.FXCollections?>
 
 <StackPane xmlns="http://javafx.com/javafx/19"
-  xmlns:fx="http://javafx.com/fxml/1" styleClass="shadow" stylesheets="@styles.css" BorderPane.alignment="CENTER">
-  <VBox alignment="CENTER" fillWidth="false" styleClass="shadow" stylesheets="@styles.css" StackPane.alignment="TOP_CENTER">
-    <VBox alignment="CENTER_RIGHT" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="shadow">
+  xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+  <VBox alignment="CENTER" fillWidth="false" stylesheets="@styles.css" StackPane.alignment="TOP_CENTER">
+    <VBox alignment="CENTER_RIGHT" spacing="30.0" style="-fx-background-color: white;">
       <children>
         <GridPane hgap="10" vgap="10">
 

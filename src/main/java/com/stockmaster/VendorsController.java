@@ -1,14 +1,22 @@
 package com.stockmaster;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.scene.control.ScrollBar;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class VendorsController {
     @FXML
@@ -21,6 +29,11 @@ public class VendorsController {
     private Label headerVendorEmailLabel;
     @FXML
     private Label headerVendorAddressLabel;
+    @FXML
+    private Button addVendorBtn;
+    @FXML
+    private Button removeVendorBtn;
+
 
     public void initialize() {
         // Other initialization code
@@ -104,6 +117,27 @@ public class VendorsController {
             }
         });
 
+        addVendorBtn.setOnAction(e -> openAddVendorPopup());
+
     }
 
+    private void openAddVendorPopup() {
+        try {
+            // Load the addVendor.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addVendor.fxml"));
+            Parent addVendorRoot = loader.load();
+    
+            // Create a new stage for the popup
+            Stage addVendorStage = new Stage();
+            addVendorStage.initModality(Modality.APPLICATION_MODAL);
+            addVendorStage.setTitle("Add New Item");
+            addVendorStage.setScene(new Scene(addVendorRoot));
+            addVendorStage.setResizable(false);
+    
+            // Show the popup and wait for it to be closed
+            addVendorStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

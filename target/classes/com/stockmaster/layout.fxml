@@ -20,13 +20,8 @@
   <top>
     <StackPane style="-fx-background-color: white;">
       <HBox alignment="CENTER_LEFT" prefHeight="50" style="-fx-background-color: white; -fx-padding: 0 10;" styleClass="shadow" stylesheets="@styles.css" StackPane.alignment="CENTER_LEFT">
-        <Label prefHeight="55.0" prefWidth="230.0" style="-fx-padding: 10 0;" stylesheets="@styles.css" text="StockMaster">
-          <styleClass>
-            <String fx:value="shadow" />
-            <String fx:value="text-2xl" />
-          </styleClass>
-        </Label>
-        <TextField prefHeight="28.0" prefWidth="203.0" promptText="Search anything" style="-fx-background-radius: 20; -fx-padding: 5 10;" styleClass="bg-color" stylesheets="@styles.css">
+        <Label prefHeight="55.0" prefWidth="230.0" style="-fx-padding: 10 0;" stylesheets="@styles.css" styleClass="sm-title" text="StockMaster"/>
+        <TextField prefHeight="28.0" prefWidth="220.0" promptText="Search anything..." style="-fx-background-radius: 20; -fx-padding: 5 10;" styleClass="bg-color" stylesheets="@styles.css">
           <HBox.margin>
             <Insets left="20.0" />
           </HBox.margin>
@@ -36,14 +31,11 @@
   </top>
   <left>
     <VBox prefWidth="240.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@styles.css">
-      <Button fx:id="dashboardBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Dashboard" />
-      <Button fx:id="addItemBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Item" />
-      <Button fx:id="inventoryBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Inventory" />
-      <Button fx:id="addVendorBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Vendor" />
-      <Button fx:id="vendorsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Vendors" />
-      <Button fx:id="addCustomerBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Customer" />
-      <Button fx:id="customersBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Customers" />
-      <Button fx:id="addPurchaseBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Purchase" />
+      <Button fx:id="dashboardBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Dashboard" />
+      <Button fx:id="inventoryBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Inventory" />
+      <Button fx:id="vendorsBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Vendors" />
+      <Button fx:id="customersBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Customers" />
+      <Button fx:id="addPurchaseBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Purchase" />
     </VBox>
   </left>
 </BorderPane>

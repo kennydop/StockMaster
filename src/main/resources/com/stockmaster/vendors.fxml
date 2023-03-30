@@ -6,8 +6,19 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
 
 <VBox BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.VendorsController">
+<HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10.0">
+          <children>
+               <Button fx:id="addVendorBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add" textFill="WHITE" />
+               <Button fx:id="removeVendorBtn" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" styleClass="remove-btn" stylesheets="@styles.css" text="Remove" textFill="WHITE" />
+          </children>
+          <VBox.margin>
+               <Insets bottom="20.0" />
+          </VBox.margin>
+     </HBox>
   <HBox>
     <Label fx:id="headerVendorNameLabel" styleClass="text-lg-label" stylesheets="@styles.css" text="Name">
    </Label>

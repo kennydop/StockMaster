@@ -1,8 +1,11 @@
 package com.stockmaster;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -10,11 +13,15 @@ import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class InventoryController {
   @FXML
   private ListView<Item> itemListView;
-
   @FXML
   private Label headerNameLabel;
   @FXML
@@ -23,6 +30,10 @@ public class InventoryController {
   private Label headerSellingPriceLabel;
   @FXML
   private Label headerVendorLabel;
+  @FXML
+  private Button addItemBtn;
+  @FXML
+  private Button removeItemBtn;
 
   public void initialize() {
     // Other initialization code
@@ -103,6 +114,27 @@ public class InventoryController {
       }
     });
 
+    addItemBtn.setOnAction(e -> openAddItemPopup());
+  }
+
+  private void openAddItemPopup() {
+    try {
+      // Load the addItem.fxml file
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("addItem.fxml"));
+      Parent addItemRoot = loader.load();
+
+      // Create a new stage for the popup
+      Stage addItemStage = new Stage();
+      addItemStage.initModality(Modality.APPLICATION_MODAL);
+      addItemStage.setTitle("Add New Item");
+      addItemStage.setScene(new Scene(addItemRoot));
+      addItemStage.setResizable(false);
+
+      // Show the popup and wait for it to be closed
+      addItemStage.showAndWait();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }

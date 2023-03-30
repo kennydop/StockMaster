@@ -18,15 +18,9 @@ public class LayoutController implements Initializable {
   @FXML
   Button dashboardBtn;
   @FXML
-  Button addItemBtn;
-  @FXML
   Button inventoryBtn;
   @FXML
-  Button addVendorBtn;
-  @FXML
   Button vendorsBtn;
-  @FXML
-  Button addCustomerBtn;
   @FXML
   Button customersBtn;
   @FXML
@@ -34,14 +28,10 @@ public class LayoutController implements Initializable {
 
   private Node currentCenterNode; // the default center node for the dashboard
   private Node dashboardNode;
-  private Node addItemNode;
   private Node inventoryNode;
-  private Node addVendorNode;
   private Node vendorsNode;
-  private Node addCustomerNode;
   private Node customersNode;
   private Node addPurchaseNode;
-  private Node salesNode;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -50,25 +40,13 @@ public class LayoutController implements Initializable {
       FXMLLoader dasboardoader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
       dashboardNode = dasboardoader.load();
 
-      // load the addItem node
-      FXMLLoader addItemLoader = new FXMLLoader(getClass().getResource("addItem.fxml"));
-      addItemNode = addItemLoader.load();
-
       // load the inventory node
       FXMLLoader inventoryLoader = new FXMLLoader(getClass().getResource("inventory.fxml"));
       inventoryNode = inventoryLoader.load();
 
-      // load the addVendor node
-      FXMLLoader addVendorLoader = new FXMLLoader(getClass().getResource("addVendor.fxml"));
-      addVendorNode = addVendorLoader.load();
-
       // load the vendors node
       FXMLLoader vendorsLoader = new FXMLLoader(getClass().getResource("vendors.fxml"));
       vendorsNode = vendorsLoader.load();
-
-      // load the addCustomer node
-      FXMLLoader addCustomerLoader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
-      addCustomerNode = addCustomerLoader.load();
 
       // load the customers node
       FXMLLoader customersLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
@@ -97,11 +75,6 @@ public class LayoutController implements Initializable {
       setClicked(dashboardBtn);
     });
 
-    addItemBtn.setOnAction(event -> {
-      rootPane.setCenter(addItemNode);
-      currentCenterNode = addItemNode;
-      setClicked(addItemBtn);
-    });
 
     inventoryBtn.setOnAction(event -> {
       rootPane.setCenter(inventoryNode);
@@ -109,22 +82,10 @@ public class LayoutController implements Initializable {
       setClicked(inventoryBtn);
     });
 
-    addVendorBtn.setOnAction(event -> {
-      rootPane.setCenter(addVendorNode);
-      currentCenterNode = addVendorNode;
-      setClicked(addVendorBtn);
-    });
-
     vendorsBtn.setOnAction(event -> {
       rootPane.setCenter(vendorsNode);
       currentCenterNode = vendorsNode;
       setClicked(vendorsBtn);
-    });
-
-    addCustomerBtn.setOnAction(event -> {
-      rootPane.setCenter(addCustomerNode);
-      currentCenterNode = addCustomerNode;
-      setClicked(addCustomerBtn);
     });
 
     customersBtn.setOnAction(event -> {
@@ -145,11 +106,8 @@ public class LayoutController implements Initializable {
 
   private void setClicked(Button btn) {
     dashboardBtn.getStyleClass().remove("clicked");
-    addItemBtn.getStyleClass().remove("clicked");
     inventoryBtn.getStyleClass().remove("clicked");
-    addVendorBtn.getStyleClass().remove("clicked");
     vendorsBtn.getStyleClass().remove("clicked");
-    addCustomerBtn.getStyleClass().remove("clicked");
     customersBtn.getStyleClass().remove("clicked");
     addPurchaseBtn.getStyleClass().remove("clicked");
     btn.getStyleClass().add("clicked");

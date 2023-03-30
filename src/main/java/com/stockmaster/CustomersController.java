@@ -1,17 +1,24 @@
 package com.stockmaster;
 
+import java.io.IOException;
+
 import com.stockmaster.Customer.CustomerType;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.scene.control.ScrollBar;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 public class CustomersController {
     @FXML
     private ListView<Customer> customersListView;
@@ -25,6 +32,10 @@ public class CustomersController {
     private Label headerCustomerEmailLabel;
     @FXML
     private Label headerCustomerAddressLabel;
+    @FXML
+    private Button addCustomerBtn;
+    @FXML
+    private Button removeVendorBtn;
 
     public void initialize() {
         // Other initialization code
@@ -113,7 +124,27 @@ public class CustomersController {
                 };
             }
         });
+        addCustomerBtn.setOnAction(e -> openAddCustomerPopup());
 
     }
 
+    private void openAddCustomerPopup() {
+        try {
+            // Load the addCustomer.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
+            Parent addCustomerRoot = loader.load();
+    
+            // Create a new stage for the popup
+            Stage addCustomerStage = new Stage();
+            addCustomerStage.initModality(Modality.APPLICATION_MODAL);
+            addCustomerStage.setTitle("Add New Item");
+            addCustomerStage.setScene(new Scene(addCustomerRoot));
+            addCustomerStage.setResizable(false);
+    
+            // Show the popup and wait for it to be closed
+            addCustomerStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -48,6 +48,12 @@
   -fx-background-color: #f5f5f5;
 }
 
+.sm-title {
+  -fx-text-fill: #ea7227;
+  -fx-font-size: 1.8em;
+  -fx-font-weight: bold;
+}
+
 .text {
   -fx-text-fill: #5a5a5a;
 }
@@ -90,7 +96,9 @@
 
 /* Buttons */
 .btn {
-  -fx-padding: 8 20 8 20;
+  -fx-pref-width: 100;
+  -fx-pref-height: 40;
+  -fx-alignment: center;
   -fx-background-radius: 5;
   -fx-background-color: #ea7227;
   -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.1), 4, 0, 1, 1);
@@ -103,8 +111,35 @@
 }
 .btn:pressed {
   -fx-background-color: #ed9820;
-  -fx-padding: 7 19 7 19;
-  -fx-marging: 1 2 1 2;
+  -fx-pref-width: 98;
+  -fx-pref-height: 38;
+}
+
+.remove-btn {
+  -fx-pref-width: 100;
+  -fx-pref-height: 40;
+  -fx-alignment: center;
+  -fx-background-radius: 5;
+  -fx-border-radius: 5;
+  -fx-background-color: white;
+  -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.1), 4, 0, 1, 1);
+  -fx-font-weight: bold;
+  -fx-font-size: 1.1em;
+  -fx-text-fill: #f91d1d;
+  -fx-border-color: #f91d1d;
+  -fx-border-width: 2;
+}
+
+.remove-btn:hover {
+  -fx-background-color: #f91d1d;
+  -fx-text-fill: white;
+}
+
+.remove-btn:pressed {
+  -fx-background-color: #f91d1d;
+  -fx-text-fill: white;
+  -fx-pref-width: 98;
+  -fx-pref-height: 38;
 }
 
 .txt-col {
@@ -266,4 +301,8 @@
   -fx-faint-focus-color: transparent;
   -fx-background-color: transparent;
   -fx-border-color: transparent;
+}
+
+.card:hover {
+  -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.25), 4, 0, 1, 1);
 }

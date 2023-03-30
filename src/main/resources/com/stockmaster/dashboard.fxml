@@ -19,10 +19,10 @@
       <VBox spacing="5.0">
         <children>
           <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="15.0" stylesheets="@styles.css">
-            <StackPane style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css" GridPane.rowIndex="1">
+            <StackPane prefWidth="280.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css" GridPane.rowIndex="1">
               <VBox>
                 <children>
-                  <Label prefHeight="17.0" prefWidth="200.0" stylesheets="@styles.css" text="Sales Overview">
+                  <Label prefHeight="17.0" prefWidth="280.0" stylesheets="@styles.css" text="Sales Overview">
                     <styleClass>
                       <String fx:value="text-xl" />
                       <String fx:value="bottom-border" />
@@ -72,13 +72,14 @@
               <styleClass>
                 <String fx:value="round" />
                 <String fx:value="shadow" />
+                     <String fx:value="card" />
               </styleClass>
             </StackPane>
-            <StackPane layoutX="20.0" layoutY="20.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
+            <StackPane layoutX="20.0" layoutY="20.0" prefWidth="280.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
               <children>
                 <VBox>
                   <children>
-                    <Label prefHeight="17.0" prefWidth="200.0" stylesheets="@styles.css" text="Purchase Overview">
+                    <Label prefHeight="17.0" prefWidth="280.0" stylesheets="@styles.css" text="Purchase Overview">
                       <styleClass>
                         <String fx:value="text-xl" />
                         <String fx:value="bottom-border" />
@@ -129,13 +130,14 @@
               <styleClass>
                 <String fx:value="round" />
                 <String fx:value="shadow" />
+                     <String fx:value="card" />
               </styleClass>
             </StackPane>
-            <StackPane layoutX="270.0" layoutY="10.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
+            <StackPane layoutX="270.0" layoutY="10.0" prefWidth="280.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
               <children>
                 <VBox>
                   <children>
-                    <Label prefHeight="17.0" prefWidth="200.0" stylesheets="@styles.css" text="Stock Overview">
+                    <Label prefHeight="17.0" prefWidth="280.0" stylesheets="@styles.css" text="Stock Overview">
                       <styleClass>
                         <String fx:value="text-xl" />
                         <String fx:value="bottom-border" />
@@ -186,6 +188,7 @@
               <styleClass>
                 <String fx:value="round" />
                 <String fx:value="shadow" />
+                     <String fx:value="card" />
               </styleClass>
             </StackPane>
             <VBox.margin>
@@ -194,10 +197,11 @@
           </HBox>
             <HBox spacing="15.0">
                <children>
-                  <StackPane prefWidth="240.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+                  <StackPane prefWidth="280.0" style="-fx-background-color: white;" stylesheets="@styles.css">
                      <styleClass>
                         <String fx:value="round" />
                         <String fx:value="shadow" />
+                        <String fx:value="card" />
                      </styleClass>
                      <children>
                         <Label styleClass="text" text="Total Vendors" StackPane.alignment="CENTER_LEFT" />
@@ -207,10 +211,11 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </StackPane>
-                <StackPane prefWidth="240.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+                <StackPane prefWidth="280.0" style="-fx-background-color: white;" stylesheets="@styles.css">
                   <styleClass>
                     <String fx:value="round" />
                     <String fx:value="shadow" />
+                        <String fx:value="card" />
                   </styleClass>
                   <children>
                     <Label styleClass="text" text="Total Customers" StackPane.alignment="CENTER_LEFT" />
@@ -220,10 +225,11 @@
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                   </padding>
                 </StackPane>
-                <StackPane prefWidth="240.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+                <StackPane prefWidth="280.0" style="-fx-background-color: white;" stylesheets="@styles.css">
                   <styleClass>
                     <String fx:value="round" />
                     <String fx:value="shadow" />
+                        <String fx:value="card" />
                   </styleClass>
                   <children>
                     <Label styleClass="text" text="Total Suppliers" StackPane.alignment="CENTER_LEFT" />
