@@ -36,7 +36,7 @@
               <Font size="13.0" />
             </font>
           </Label>
-          <ComboBox fx:id="categoryDropdown" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <ComboBox fx:id="addItemCategoryDropdown" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <items>
               <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Beverages" />

@@ -87,8 +87,16 @@ public class Item {
     return expiryDate;
   }
 
+  public Date getSqlExpiryDate() {
+    return new java.sql.Date(expiryDate.getTime());
+  }
+
   public void setExpiryDate(Date expiryDate) {
     this.expiryDate = expiryDate;
+  }
+
+  public void setExpiryDate(LocalDate value) {
+    this.expiryDate = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant());
   }
 
   public String getUnitOfMeasurement() {
@@ -109,6 +117,10 @@ public class Item {
 
   public Date getCreatedAt() {
     return createdAt;
+  }
+
+  public Date getSqlCreatedAt() {
+    return new java.sql.Date(createdAt.getTime());
   }
 
   public void setCreatedAt(Date createdAt) {
@@ -143,8 +155,13 @@ public class Item {
         + exp + "', created_at = '" + ct + "'";
   }
 
-  public void setExpiryDate(LocalDate value) {
-    this.expiryDate = Date.from(value.atStartOfDay(ZoneId.systemDefault()).toInstant());
+  public static Item nullItem() {
+    return new Item(-1, null, null, -1, -1, -1, null, null, -1, null, null);
+  }
+
+  public boolean isNull() {
+    return name == null || quantity < 0 || category == null || sold == -1 || sellingPrice < 0
+        || costPrice < 0 || unitOfMeasurement == null || vendor == null || expiryDate == null || createdAt == null;
   }
 
 }

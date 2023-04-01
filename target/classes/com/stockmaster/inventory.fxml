@@ -14,7 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.InventoryController">
+<VBox BorderPane.alignment="CENTER"
+  xmlns="http://javafx.com/javafx/19"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.InventoryController">
   <HBox alignment="CENTER" prefHeight="40.0">
     <children>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" spacing="10.0">
@@ -24,7 +26,7 @@
               <Font size="13.0" />
             </font>
           </Label>
-          <ComboBox fx:id="categoryDropdown" prefWidth="250.0" styleClass="other-txt-field" stylesheets="@styles.css">
+          <ComboBox fx:id="categoryDropdown" styleClass="other-txt-field" stylesheets="@styles.css">
             <items>
               <FXCollections fx:factory="observableArrayList">
                 <String fx:value="All" />
@@ -51,27 +53,40 @@
       </Pane>
       <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10.0">
         <children>
-          <Button fx:id="addItemBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add Item" textFill="WHITE" />
+          <Button fx:id="addAfterBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add After" textFill="WHITE" />
+          <Button fx:id="addBeforeBtn" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add Before" textFill="WHITE" />
+          <Button fx:id="addItemBtn" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add Item" textFill="WHITE" />
           <Button fx:id="removeItemBtn" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" styleClass="remove-btn" stylesheets="@styles.css" text="Remove Item" textFill="WHITE">
-                  <padding>
-                     <Insets left="5.0" right="5.0" />
-                  </padding></Button>
+            <padding>
+              <Insets left="5.0" right="5.0" />
+            </padding>
+          </Button>
           <Button fx:id="addPurchaseBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Add Purchase" textFill="WHITE" />
         </children>
       </HBox>
     </children>
     <VBox.margin>
-      <Insets bottom="20.0" />
+      <Insets bottom="10.0" />
     </VBox.margin>
+  </HBox>
+  <HBox spacing="3.0" stylesheets="@styles.css">
+    <children>
+      <Label style="-fx-font-weight: 600;" styleClass="txt-col" stylesheets="@styles.css" text="Data Structure In Use:" />
+      <Label fx:id="dataStructureInUse" layoutX="10.0" layoutY="10.0" style="-fx-font-weight: 700;" styleClass="txt-col" stylesheets="@styles.css" text="Multiple" />
+    </children>
   </HBox>
   <TableView fx:id="itemTableView" styleClass="item-table-view" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
     <columns>
       <TableColumn fx:id="nameColumn" editable="false" resizable="false" sortable="false" text="Name" />
+      <TableColumn fx:id="categoryColumn" editable="false" resizable="false" sortable="false" text="Category" />
       <TableColumn fx:id="quantityColumn" editable="false" resizable="false" sortable="false" text="Quantity" />
       <TableColumn fx:id="soldColumn" editable="false" resizable="false" sortable="false" text="Sold" />
       <TableColumn fx:id="sellingPriceColumn" editable="false" resizable="false" sortable="false" text="Selling Price" />
       <TableColumn fx:id="vendorColumn" editable="false" resizable="false" sortable="false" text="Vendor" />
     </columns>
+    <VBox.margin>
+      <Insets top="5.0" />
+    </VBox.margin>
   </TableView>
   <padding>
     <Insets left="20.0" right="20.0" top="20.0" />

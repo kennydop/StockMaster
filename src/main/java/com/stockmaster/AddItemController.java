@@ -16,7 +16,7 @@ public class AddItemController {
   @FXML
   private TextField itemNameField;
   @FXML
-  private ComboBox<String> categoryDropdown;
+  private ComboBox<String> addItemCategoryDropdown;
   @FXML
   private ComboBox<String> unitOfMeasurementDropdown;
   @FXML
@@ -38,7 +38,7 @@ public class AddItemController {
   private void handleAddButtonClick(ActionEvent event) {
     InventoryController.toAdd.setSold(0);
     InventoryController.toAdd.setName(itemNameField.getText());
-    InventoryController.toAdd.setCategory(categoryDropdown.getValue().toString());
+    InventoryController.toAdd.setCategory(addItemCategoryDropdown.getValue().toString());
     InventoryController.toAdd.setUnitOfMeasurement(unitOfMeasurementDropdown.getValue().toString());
     InventoryController.toAdd.setCostPrice(Double.parseDouble(costPriceField.getText()));
     InventoryController.toAdd.setSellingPrice(Double.parseDouble(sellingPriceField.getText()));
@@ -48,9 +48,19 @@ public class AddItemController {
     InventoryController.toAdd.setCreatedAt(new Date());
 
     // Close the window
-    Stage stage = (Stage) itemNameField.getScene().getWindow();
-    stage.close();
+    if (!InventoryController.toAdd.isNull()) {
+      Stage stage = (Stage) itemNameField.getScene().getWindow();
+      stage.close();
+    }
 
     // TODO: parse negative values
+  }
+
+  public void setSelectedCategory(String category) {
+    System.out.println("Selecting category " + category);
+    System.out.println(category != null && addItemCategoryDropdown != null && category != "All");
+    if (category != null && addItemCategoryDropdown != null && category != "All") {
+      addItemCategoryDropdown.getSelectionModel().select(category);
+    }
   }
 }

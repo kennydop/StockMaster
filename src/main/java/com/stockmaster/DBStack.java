@@ -25,7 +25,7 @@ public class DBStack<T> {
 
       // Create the table if it doesn't exist
       String createTableQuery = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
-          "id INT, " +
+          "id INT UNIQUE, " +
           "name VARCHAR(255), " +
           "category VARCHAR(255), " +
           "quantity INT, " +
