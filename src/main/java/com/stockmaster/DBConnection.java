@@ -38,26 +38,6 @@ public class DBConnection {
   }
 
   private void createTables() {
-    // create category tables
-    String[] tables = { "beverages", "bakery", "canned", "jared", "dairy", "dry", "frozen", "meat", "produce",
-        "cleaners", "paper", "personal" };
-    for (int i = 0; i < tables.length; i++) {
-      System.out.println("Creating " + tables[i] + " table ...");
-      String createProductsTableCmd = "CREATE TABLE IF NOT EXISTS " + tables[i] + " (" +
-          "id INT, " +
-          "name VARCHAR(255) NOT NULL, " +
-          "quantity INT NOT NULL, " +
-          "unit_of_measurement INT NOT NULL, " +
-          "cost_price DECIMAL(10, 2) NOT NULL, " +
-          "selling_price DECIMAL(10, 2) NOT NULL, " +
-          "sold INT NOT NULL DEFAULT 0, " +
-          "expiry_date DATE NOT NULL, " +
-          "created_at DATE NOT NULL, " +
-          "vendor_id INT NOT NULL" +
-          ")";
-      execCreateCommand(createProductsTableCmd);
-      System.out.println("Created " + tables[i] + " table");
-    }
 
     // create vendors tables
     String createVendorsTableCmd = "CREATE TABLE IF NOT EXISTS vendors (" +

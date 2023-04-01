@@ -42,6 +42,7 @@ public class InventoryController {
   ObservableList<Item> allItems = FXCollections.observableArrayList();
   protected static Item toAdd = new Item(-1, null, null, -1, -1, -1, null, null, 0, null, null);
 
+  // Instanciate Stacks
   DBStack<Item> beverages = new DBStack<Item>(5, "beverages");
   ObservableList<Item> beverageItems;
   DBStack<Item> bakery = new DBStack<Item>(5, "bakery");
@@ -51,8 +52,15 @@ public class InventoryController {
   DBStack<Item> dairy = new DBStack<Item>(5, "dairy");
   ObservableList<Item> dairyItems;
 
-  public void initialize() {
+  // Instantiate Queue
+  DBQueue<Item> dry = new DBQueue<Item>(5, "dry");
+  ObservableList<Item> dryItems;
+  DBQueue<Item> frozen = new DBQueue<Item>(5, "frozen");
+  ObservableList<Item> frozenItems;
+  DBQueue<Item> meat = new DBQueue<Item>(5, "meat");
+  ObservableList<Item> meatItems;
 
+  public void initialize() {
     // Set the percentage widths for the columns
     nameColumn.prefWidthProperty().bind(itemTableView.widthProperty().subtract(6).multiply(0.38));
     quantityColumn.prefWidthProperty().bind(itemTableView.widthProperty().subtract(6).multiply(0.12));
@@ -150,6 +158,21 @@ public class InventoryController {
         dairyItems.add(0, item);
         allItems.add(0, item);
         break;
+      case "dry":
+        dry.enqueue(item);
+        dryItems.add(item);
+        allItems.add(item);
+        break;
+      case "frozen":
+        frozen.enqueue(item);
+        frozenItems.add(item);
+        allItems.add(item);
+        break;
+      case "meat":
+        meat.enqueue(item);
+        meatItems.add(item);
+        allItems.add(item);
+        break;
       default:
         System.out.println("Category not supported");
         break;
@@ -159,11 +182,11 @@ public class InventoryController {
   }
 
   private void removeItem() {
-    if (allItems.size() < 1)
+    if (selectedCategory == "All" || allItems.size() < 1)
       return;
-    System.out.println("removing item");
+    System.out.println("removing item from " + selectedCategory.toLowerCase().toLowerCase().split("/")[0] + "...");
     Item removedItem = null;
-    switch (selectedCategory.toLowerCase()) {
+    switch (selectedCategory.toLowerCase().toLowerCase().split("/")[0]) {
       case "beverages":
         beverages.pop();
         removedItem = beverageItems.remove(0);
@@ -179,6 +202,18 @@ public class InventoryController {
       case "dairy":
         dairy.pop();
         removedItem = dairyItems.remove(0);
+        break;
+      case "dry":
+        dry.dequeue();
+        removedItem = dryItems.remove(0);
+        break;
+      case "frozen":
+        frozen.dequeue();
+        removedItem = frozenItems.remove(0);
+        break;
+      case "meat":
+        meat.dequeue();
+        removedItem = meatItems.remove(0);
         break;
       default:
         break;
@@ -196,11 +231,16 @@ public class InventoryController {
     bakeryItems = bakery.getItems();
     cannedItems = canned.getItems();
     dairyItems = dairy.getItems();
+    dryItems = dry.getItems();
+    frozenItems = frozen.getItems();
+    meatItems = meat.getItems();
     allItems.addAll(beverageItems);
     allItems.addAll(bakeryItems);
     allItems.addAll(cannedItems);
     allItems.addAll(dairyItems);
-    allItems.sorted();
+    allItems.addAll(dryItems);
+    allItems.addAll(frozenItems);
+    allItems.addAll(meatItems);
   }
 
   private void handleCategoryChange(String category) {
@@ -217,6 +257,15 @@ public class InventoryController {
         break;
       case "dairy":
         itemTableView.setItems(dairyItems);
+        break;
+      case "dry":
+        itemTableView.setItems(dryItems);
+        break;
+      case "frozen":
+        itemTableView.setItems(frozenItems);
+        break;
+      case "meat":
+        itemTableView.setItems(meatItems);
         break;
       case "all":
         itemTableView.setItems(allItems);

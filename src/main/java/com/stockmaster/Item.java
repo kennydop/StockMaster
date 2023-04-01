@@ -12,7 +12,7 @@ public class Item {
   private int sold = 0;
   private double sellingPrice;
   private String vendor;
-  private int vendorId;
+  // private int vendorId;
   private String unitOfMeasurement;
   private double costPrice;
   private Date expiryDate;
