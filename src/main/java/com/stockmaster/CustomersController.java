@@ -8,143 +8,84 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 public class CustomersController {
-    @FXML
-    private ListView<Customer> customersListView;
-    @FXML
-    private Label headerCustomerNameLabel;
-    @FXML
-    private Label headerCustomerTypeLabel;
-    @FXML
-    private Label headerCustomerPhoneLabel;
-    @FXML
-    private Label headerCustomerEmailLabel;
-    @FXML
-    private Label headerCustomerAddressLabel;
-    @FXML
-    private Button addCustomerBtn;
-    @FXML
-    private Button removeVendorBtn;
+  @FXML
+  private TableView<Customer> customersTableView;
+  @FXML
+  private TableColumn<Customer, String> customerNameColumn;
+  @FXML
+  private TableColumn<Customer, String> customerTypeColumn;
+  @FXML
+  private TableColumn<Customer, String> customerPhoneColumn;
+  @FXML
+  private TableColumn<Customer, String> customerAddressColumn;
+  @FXML
+  private TableColumn<Customer, String> customerEmailColumn;
+  @FXML
+  private Button addCustomerBtn;
+  @FXML
+  private Button removeVendorBtn;
 
-    public void initialize() {
-        // Other initialization code
+  public void initialize() {
+    // Set the percentage widths for the columns
+    customerNameColumn.prefWidthProperty().bind(customersTableView.widthProperty().subtract(6).multiply(0.20));
+    customerTypeColumn.prefWidthProperty().bind(customersTableView.widthProperty().subtract(6).multiply(0.20));
+    customerPhoneColumn.prefWidthProperty().bind(customersTableView.widthProperty().subtract(6).multiply(0.20));
+    customerAddressColumn.prefWidthProperty().bind(customersTableView.widthProperty().subtract(6).multiply(0.20));
+    customerEmailColumn.prefWidthProperty().bind(customersTableView.widthProperty().subtract(6).multiply(0.20));
 
-        // Create sample data
-        ObservableList<Customer> customers = FXCollections.observableArrayList(
-                new Customer("Customer 1", "Ayawaso West", "026132748", "mdpot@coco.co", CustomerType.Wholesale),
-                new Customer("Customer 2", "Dzemeni", "0423629234", "opk@toure.xo", CustomerType.Online),
-                new Customer("Customer 3", "Behind Lake Bosomtwe", "065526477", "v3@customers.yat", CustomerType.Retail),
-                new Customer("Customer 4", "Philadelphia, Kumasi", "0123456789", "driller@yga.ken", CustomerType.Online));
+    // Set the cell value factories
+    customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    customerTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+    customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+    customerEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // Set the items in the ListView
-        customersListView.setItems(customers);
+    // Create sample data
+    ObservableList<Customer> customers = FXCollections.observableArrayList(
+        new Customer("Customer 1", "Ayawaso West", "026132748", "mdpot@coco.co",
+            CustomerType.Wholesale),
+        new Customer("Customer 2", "Dzemeni", "0423629234", "opk@toure.xo",
+            CustomerType.Online),
+        new Customer("Customer 3", "Behind Lake Bosomtwe", "065526477",
+            "v3@customers.yat", CustomerType.Retail),
+        new Customer("Customer 4", "Philadelphia, Kumasi", "0123456789",
+            "driller@yga.ken", CustomerType.Online));
 
-        // Set the custom cell factory for the ListView
-        customersListView.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
-            @Override
-            public ListCell<Customer> call(ListView<Customer> listView) {
-                return new ListCell<Customer>() {
-                    // Create labels for each cell
-                    Label nameLabel = new Label();
-                    Label typeLabel = new Label();
-                    Label addressLabel = new Label();
-                    Label phonLabel = new Label();
-                    Label emailLabel = new Label();
+    // Set the items in the ListView
+    customersTableView.setItems(customers);
 
-                    // Create the HBox layout for the cell
-                    HBox cellLayout = new HBox(nameLabel, typeLabel, addressLabel, phonLabel, emailLabel);
+    addCustomerBtn.setOnAction(e -> openAddCustomerPopup());
 
-                    {
+  }
 
-                        // Find the vertical scrollbar of the ListView
-                        ScrollBar scrollBar = (ScrollBar) customersListView.lookup(".scroll-bar:vertical");
-                        if (scrollBar == null) {
-                            customersListView.applyCss();
-                            scrollBar = (ScrollBar) customersListView.lookup(".scroll-bar:vertical");
-                        }
+  private void openAddCustomerPopup() {
+    try {
+      // Load the addCustomer.fxml file
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
+      Parent addCustomerRoot = loader.load();
 
-                        double scrollBarWidth = scrollBar.getWidth();
+      // Create a new stage for the popup
+      Stage addCustomerStage = new Stage();
+      addCustomerStage.initModality(Modality.APPLICATION_MODAL);
+      addCustomerStage.setTitle("Add New Customer");
+      addCustomerStage.setScene(new Scene(addCustomerRoot));
+      addCustomerStage.setResizable(false);
 
-                        // Set the preferred width for the header labels
-                        headerCustomerNameLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        headerCustomerTypeLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        headerCustomerPhoneLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        headerCustomerEmailLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        headerCustomerAddressLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-
-                        // Bind the preferred width of each label, accounting for the scrollbar's width
-                        nameLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                                typeLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        addressLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        phonLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-                        emailLabel.prefWidthProperty()
-                                .bind(customersListView.widthProperty().subtract(scrollBarWidth).multiply(0.20));
-
-                        // Set the cell layout style
-                        cellLayout.getStyleClass().add("custom-list-cell");
-
-                    }
-
-                    @Override
-                    protected void updateItem(Customer customer, boolean empty) {
-                        super.updateItem(customer, empty);
-                        if (customer == null || empty) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            nameLabel.setText(customer.getName());
-                            typeLabel.setText(customer.getTypeAString());
-                            phonLabel.setText(customer.getPhone());
-                            addressLabel.setText(customer.getAddress());
-                            emailLabel.setText(customer.getEmail());
-
-                            setGraphic(cellLayout);
-                        }
-                    }
-                };
-            }
-        });
-        addCustomerBtn.setOnAction(e -> openAddCustomerPopup());
-
+      // Show the popup and wait for it to be closed
+      addCustomerStage.showAndWait();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    private void openAddCustomerPopup() {
-        try {
-            // Load the addCustomer.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
-            Parent addCustomerRoot = loader.load();
-    
-            // Create a new stage for the popup
-            Stage addCustomerStage = new Stage();
-            addCustomerStage.initModality(Modality.APPLICATION_MODAL);
-            addCustomerStage.setTitle("Add New Item");
-            addCustomerStage.setScene(new Scene(addCustomerRoot));
-            addCustomerStage.setResizable(false);
-    
-            // Show the popup and wait for it to be closed
-            addCustomerStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  }
 }

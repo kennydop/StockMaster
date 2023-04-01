@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * JavaFX App
@@ -14,14 +18,21 @@ import java.io.IOException;
 public class App extends Application {
 
   private static Scene scene;
+  private Connection connection;
+
+  @Override
+  public void init() {
+    DBConnection dbConnection = new DBConnection();
+    connection = dbConnection.setupDatabaseConnection();
+  }
 
   @Override
   public void start(Stage stage) throws IOException {
-    scene = new Scene(loadFXML("layout"));
+    scene = new Scene(loadFXML("layout"), 800, 600);
     scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
     stage.setScene(scene);
     stage.setTitle("StockMaster");
-    // stage.isMaximized();
+    stage.isMaximized();
     stage.show();
   }
 
@@ -37,4 +48,17 @@ public class App extends Application {
   public static void main(String[] args) {
     launch();
   }
+
+  @Override
+  public void stop() {
+    if (connection != null) {
+      try {
+        connection.close();
+        System.out.println("Database connection closed.");
+      } catch (SQLException e) {
+        System.err.println("Error closing database connection: " + e.getMessage());
+      }
+    }
+  }
+
 }

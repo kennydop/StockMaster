@@ -35,7 +35,6 @@
       <Button fx:id="inventoryBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Inventory" />
       <Button fx:id="vendorsBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Vendors" />
       <Button fx:id="customersBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Customers" />
-      <Button fx:id="addPurchaseBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@styles.css" text="Add Purchase" />
     </VBox>
   </left>
 </BorderPane>

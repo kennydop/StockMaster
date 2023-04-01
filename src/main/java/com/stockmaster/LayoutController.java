@@ -23,15 +23,12 @@ public class LayoutController implements Initializable {
   Button vendorsBtn;
   @FXML
   Button customersBtn;
-  @FXML
-  Button addPurchaseBtn;
 
   private Node currentCenterNode; // the default center node for the dashboard
   private Node dashboardNode;
   private Node inventoryNode;
   private Node vendorsNode;
   private Node customersNode;
-  private Node addPurchaseNode;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -51,11 +48,6 @@ public class LayoutController implements Initializable {
       // load the customers node
       FXMLLoader customersLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
       customersNode = customersLoader.load();
-
-      // load the addPurchase node
-      FXMLLoader addPurchaseLoader = new
-      FXMLLoader(getClass().getResource("addPurchase.fxml"));
-      addPurchaseNode = addPurchaseLoader.load();
 
     } catch (IOException e) {
       // TODO Auto-generated catch block
@@ -94,11 +86,6 @@ public class LayoutController implements Initializable {
       setClicked(customersBtn);
     });
 
-    addPurchaseBtn.setOnAction(event -> {
-    rootPane.setCenter(addPurchaseNode);
-    currentCenterNode = addPurchaseNode;
-    setClicked(addPurchaseBtn);
-    });
 
 
     Platform.runLater(() -> rootPane.requestFocus());
@@ -109,7 +96,6 @@ public class LayoutController implements Initializable {
     inventoryBtn.getStyleClass().remove("clicked");
     vendorsBtn.getStyleClass().remove("clicked");
     customersBtn.getStyleClass().remove("clicked");
-    addPurchaseBtn.getStyleClass().remove("clicked");
     btn.getStyleClass().add("clicked");
   }
 }

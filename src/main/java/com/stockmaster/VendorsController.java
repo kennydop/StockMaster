@@ -12,132 +12,75 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class VendorsController {
-    @FXML
-    private ListView<Vendor> vendorsListView;
-    @FXML
-    private Label headerVendorNameLabel;
-    @FXML
-    private Label headerVendorPhoneLabel;
-    @FXML
-    private Label headerVendorEmailLabel;
-    @FXML
-    private Label headerVendorAddressLabel;
-    @FXML
-    private Button addVendorBtn;
-    @FXML
-    private Button removeVendorBtn;
+  @FXML
+  private TableView<Vendor> vendorsTableView;
+  @FXML
+  private TableColumn<Vendor, String> vendorNameColumn;
+  @FXML
+  private TableColumn<Vendor, String> vendorPhoneColumn;
+  @FXML
+  private TableColumn<Vendor, String> vendorAddressColumn;
+  @FXML
+  private TableColumn<Vendor, String> vendorEmailColumn;
+  @FXML
+  private Button addVendorBtn;
+  @FXML
+  private Button removeVendorBtn;
 
+  public void initialize() {
+    // Set the percentage widths for the columns
+    vendorNameColumn.prefWidthProperty().bind(vendorsTableView.widthProperty().subtract(6).multiply(0.25));
+    vendorPhoneColumn.prefWidthProperty().bind(vendorsTableView.widthProperty().subtract(6).multiply(0.25));
+    vendorAddressColumn.prefWidthProperty().bind(vendorsTableView.widthProperty().subtract(6).multiply(0.25));
+    vendorEmailColumn.prefWidthProperty().bind(vendorsTableView.widthProperty().subtract(6).multiply(0.25));
 
-    public void initialize() {
-        // Other initialization code
+    // Set the cell value factories
+    vendorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    vendorPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    vendorAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+    vendorEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // Create sample data
-        ObservableList<Vendor> vendors = FXCollections.observableArrayList(
-                new Vendor("Vendor 1", "Ayawaso West", "026132748", "mdpot@coco.co"),
-                new Vendor("Vendor 2", "Dzemeni", "0423629234", "opk@toure.xo"),
-                new Vendor("Vendor 3", "Behind Lake Bosomtwe", "065526477", "v3@vendors.yat"),
-                new Vendor("Vendor 4", "Philadelphia, Kumasi", "0123456789", "driller@yga.ken"));
+    // Create sample data
+    ObservableList<Vendor> vendors = FXCollections.observableArrayList(
+        new Vendor("Vendor 1", "Ayawaso West", "026132748", "mdpot@coco.co"),
+        new Vendor("Vendor 2", "Dzemeni", "0423629234", "opk@toure.xo"),
+        new Vendor("Vendor 3", "Behind Lake Bosomtwe", "065526477", "v3@vendors.yat"),
+        new Vendor("Vendor 4", "Philadelphia, Kumasi", "0123456789", "driller@yga.ken"));
 
-        // Set the items in the ListView
-        vendorsListView.setItems(vendors);
+    // Set the items in the ListView
+    vendorsTableView.setItems(vendors);
 
-        // Set the custom cell factory for the ListView
-        vendorsListView.setCellFactory(new Callback<ListView<Vendor>, ListCell<Vendor>>() {
-            @Override
-            public ListCell<Vendor> call(ListView<Vendor> listView) {
-                return new ListCell<Vendor>() {
-                    // Create labels for each cell
-                    Label nameLabel = new Label();
-                    Label addressLabel = new Label();
-                    Label phonLabel = new Label();
-                    Label emailLabel = new Label();
+    addVendorBtn.setOnAction(e -> openAddVendorPopup());
 
-                    // Create the HBox layout for the cell
-                    HBox cellLayout = new HBox(nameLabel, addressLabel, phonLabel, emailLabel);
+  }
 
-                    {
+  private void openAddVendorPopup() {
+    try {
+      // Load the addVendor.fxml file
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("addVendor.fxml"));
+      Parent addVendorRoot = loader.load();
 
-                        // Find the vertical scrollbar of the ListView
-                        ScrollBar scrollBar = (ScrollBar) vendorsListView.lookup(".scroll-bar:vertical");
-                        if (scrollBar == null) {
-                            vendorsListView.applyCss();
-                            scrollBar = (ScrollBar) vendorsListView.lookup(".scroll-bar:vertical");
-                        }
+      // Create a new stage for the popup
+      Stage addVendorStage = new Stage();
+      addVendorStage.initModality(Modality.APPLICATION_MODAL);
+      addVendorStage.setTitle("Add New Vendor");
+      addVendorStage.setScene(new Scene(addVendorRoot));
+      addVendorStage.setResizable(false);
 
-                        double scrollBarWidth = scrollBar.getWidth();
-
-                        // Set the preferred width for the header labels
-                        headerVendorNameLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-                        headerVendorPhoneLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-                        headerVendorEmailLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-                        headerVendorAddressLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-
-                        // Bind the preferred width of each label, accounting for the scrollbar's width
-                        nameLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-                        addressLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-                        phonLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-                        emailLabel.prefWidthProperty()
-                                .bind(vendorsListView.widthProperty().subtract(scrollBarWidth).multiply(0.25));
-
-                        // Set the cell layout style
-                        cellLayout.getStyleClass().add("custom-list-cell");
-
-                    }
-
-                    @Override
-                    protected void updateItem(Vendor vendor, boolean empty) {
-                        super.updateItem(vendor, empty);
-                        if (vendor == null || empty) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            nameLabel.setText(vendor.getName());
-                            phonLabel.setText(vendor.getPhone());
-                            addressLabel.setText(vendor.getAddress());
-                            emailLabel.setText(vendor.getEmail());
-
-                            setGraphic(cellLayout);
-                        }
-                    }
-                };
-            }
-        });
-
-        addVendorBtn.setOnAction(e -> openAddVendorPopup());
-
+      // Show the popup and wait for it to be closed
+      addVendorStage.showAndWait();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    private void openAddVendorPopup() {
-        try {
-            // Load the addVendor.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addVendor.fxml"));
-            Parent addVendorRoot = loader.load();
-    
-            // Create a new stage for the popup
-            Stage addVendorStage = new Stage();
-            addVendorStage.initModality(Modality.APPLICATION_MODAL);
-            addVendorStage.setTitle("Add New Item");
-            addVendorStage.setScene(new Scene(addVendorRoot));
-            addVendorStage.setResizable(false);
-    
-            // Show the popup and wait for it to be closed
-            addVendorStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  }
 }
