@@ -1,6 +1,7 @@
 package com.stockmaster;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +32,15 @@ public class VendorsController {
   @FXML
   private Button removeVendorBtn;
 
+  private String selectedKey = "";
+
+  public static ObservableList<String> vendorNames = FXCollections.observableArrayList();
+
+  private DBHashMap<String, HashMap<String, String>> vendors = new DBHashMap<String, HashMap<String, String>>(
+      "vendors");
+  ObservableList<Vendor> vendorsList = FXCollections.observableArrayList();
+  protected static Vendor toAdd = Vendor.nullVendor();
+
   public void initialize() {
     // Set the percentage widths for the columns
     vendorNameColumn.prefWidthProperty().bind(vendorsTableView.widthProperty().subtract(6).multiply(0.25));
@@ -44,17 +54,24 @@ public class VendorsController {
     vendorAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
     vendorEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-    // Create sample data
-    ObservableList<Vendor> vendors = FXCollections.observableArrayList(
-        new Vendor("Vendor 1", "Ayawaso West", "026132748", "mdpot@coco.co"),
-        new Vendor("Vendor 2", "Dzemeni", "0423629234", "opk@toure.xo"),
-        new Vendor("Vendor 3", "Behind Lake Bosomtwe", "065526477", "v3@vendors.yat"),
-        new Vendor("Vendor 4", "Philadelphia, Kumasi", "0123456789", "driller@yga.ken"));
+    // fetch all vendors
+    fetchVendors();
+    fetchVendorNames();
 
     // Set the items in the ListView
-    vendorsTableView.setItems(vendors);
+    vendorsTableView.setItems(vendorsList);
+
+    // listen to TableView's selection changes
+    vendorsTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue != null) {
+        selectedKey = newValue.getName();
+      } else {
+        selectedKey = "";
+      }
+    });
 
     addVendorBtn.setOnAction(e -> openAddVendorPopup());
+    removeVendorBtn.setOnAction(e -> removeVendor(selectedKey));
 
   }
 
@@ -73,8 +90,33 @@ public class VendorsController {
 
       // Show the popup and wait for it to be closed
       addVendorStage.showAndWait();
+      if (!toAdd.isNull())
+        addVendor(toAdd.getName(), toAdd);
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  private void addVendor(String name, Vendor vendor) {
+    vendors.put(name, vendor.toHashMap());
+    vendorsList.removeIf((element) -> element.getName().hashCode() == name.hashCode());
+    vendorsList.add(vendor);
+    vendorNames.add(name);
+    toAdd = Vendor.nullVendor();
+  }
+
+  private void removeVendor(String name) {
+    vendors.remove(name);
+    vendorsList.removeIf((element) -> element.getName() == name);
+    vendorNames.remove(name);
+  }
+
+  private void fetchVendors() {
+    vendorsList = vendors.getVendors();
+    // vendorsList.addAll(Vendor.getVendors());
+  }
+
+  public void fetchVendorNames() {
+    vendorNames = vendors.getVendors(true);
   }
 }

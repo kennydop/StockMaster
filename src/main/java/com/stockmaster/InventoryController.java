@@ -48,37 +48,37 @@ public class InventoryController {
   private Label dataStructureInUse;
 
   String selectedCategory = "All";
-  int selectedListIndex = -1;
+  private int selectedListIndex = -1;
   ObservableList<Item> allItems = FXCollections.observableArrayList();
   protected static Item toAdd = Item.nullItem();
 
   // Instanciate Stacks
-  DBStack<Item> beverages = new DBStack<Item>(5, "beverages");
-  ObservableList<Item> beverageItems;
-  DBStack<Item> bakery = new DBStack<Item>(5, "bakery");
-  ObservableList<Item> bakeryItems;
-  DBStack<Item> canned = new DBStack<Item>(5, "canned");
-  ObservableList<Item> cannedItems;
-  DBStack<Item> dairy = new DBStack<Item>(5, "dairy");
-  ObservableList<Item> dairyItems;
+  private DBStack<Item> beverages = new DBStack<Item>(5, "beverages");
+  private ObservableList<Item> beverageItems;
+  private DBStack<Item> bakery = new DBStack<Item>(5, "bakery");
+  private ObservableList<Item> bakeryItems;
+  private DBStack<Item> canned = new DBStack<Item>(5, "canned");
+  private ObservableList<Item> cannedItems;
+  private DBStack<Item> dairy = new DBStack<Item>(5, "dairy");
+  private ObservableList<Item> dairyItems;
 
   // Instantiate Queues
-  DBQueue<Item> dry = new DBQueue<Item>(5, "dry");
-  ObservableList<Item> dryItems;
-  DBQueue<Item> frozen = new DBQueue<Item>(5, "frozen");
-  ObservableList<Item> frozenItems;
-  DBQueue<Item> meat = new DBQueue<Item>(5, "meat");
-  ObservableList<Item> meatItems;
+  private DBQueue<Item> dry = new DBQueue<Item>(5, "dry");
+  private ObservableList<Item> dryItems;
+  private DBQueue<Item> frozen = new DBQueue<Item>(5, "frozen");
+  private ObservableList<Item> frozenItems;
+  private DBQueue<Item> meat = new DBQueue<Item>(5, "meat");
+  private ObservableList<Item> meatItems;
 
   // Instanciate Stacks
-  DBList<Item> produce = new DBList<Item>("produce");
-  ObservableList<Item> produceItems;
-  DBList<Item> cleaners = new DBList<Item>("cleaners");
-  ObservableList<Item> cleanersItems;
-  DBList<Item> paper = new DBList<Item>("paper");
-  ObservableList<Item> paperItems;
-  DBList<Item> personal = new DBList<Item>("personal");
-  ObservableList<Item> personalItems;
+  private DBList<Item> produce = new DBList<Item>("produce");
+  private ObservableList<Item> produceItems;
+  private DBList<Item> cleaners = new DBList<Item>("cleaners");
+  private ObservableList<Item> cleanersItems;
+  private DBList<Item> paper = new DBList<Item>("paper");
+  private ObservableList<Item> paperItems;
+  private DBList<Item> personal = new DBList<Item>("personal");
+  private ObservableList<Item> personalItems;
 
   public void initialize() {
     // Hide list buttons initially
@@ -131,6 +131,7 @@ public class InventoryController {
         }
       } else {
         // No item is selected, hide the button
+        selectedListIndex = -1;
         addAfterBtn.setVisible(false);
         addBeforeBtn.setVisible(false);
       }
@@ -163,7 +164,7 @@ public class InventoryController {
       // Show the popup and wait for it to be closed
       addItemStage.showAndWait();
       if (!toAdd.isNull())
-        addToDB(index, toAdd);
+        addItem(index, toAdd);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -189,7 +190,7 @@ public class InventoryController {
     }
   }
 
-  private void addToDB(int index, Item item) {
+  private void addItem(int index, Item item) {
     System.out.println("adding " + item.getName() + " to " + item.getCategory().toLowerCase().split("/")[0]);
     switch (item.getCategory().toLowerCase().split("/")[0]) {
       case "beverages":

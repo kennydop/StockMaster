@@ -17,7 +17,7 @@
 <?import javafx.collections.FXCollections?>
 
 <StackPane xmlns="http://javafx.com/javafx/19"
-  xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+  xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css" BorderPane.alignment="CENTER" fx:controller="com.stockmaster.AddVendorController">
   <VBox alignment="CENTER" fillWidth="false" stylesheets="@styles.css" StackPane.alignment="TOP_CENTER">
     <VBox alignment="CENTER_RIGHT" spacing="30.0" style="-fx-background-color: white;">
       <children>
@@ -35,7 +35,7 @@
               <Font size="13.0" />
             </font>
           </Label>
-                    <TextField fx:id="vendorAddressField" prefHeight="25.0" prefWidth="300.0" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+          <TextField fx:id="vendorAddressField" prefHeight="25.0" prefWidth="300.0" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
           <Label text="Phone" GridPane.columnIndex="0" GridPane.rowIndex="3">
             <font>
               <Font size="13.0" />
@@ -48,7 +48,7 @@
             </font>
           </Label>
           <TextField fx:id="vendorEmailField" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-          
+
           <columnConstraints>
             <ColumnConstraints />
             <ColumnConstraints />

@@ -32,7 +32,7 @@ public class DBList<T> {
           "selling_price DECIMAL(10, 2), " +
           "sold INT, " +
           "expiry_date DATE, " +
-          "created_at DATE, " +
+          "created_at TIMESTAMP, " +
           "vendor VARCHAR(255)" +
           ")";
       Statement createTableStatement = connection.createStatement();
@@ -173,6 +173,7 @@ public class DBList<T> {
     return size;
   }
 
+  @SuppressWarnings("unchecked")
   private T getItem(int index) {
     T item = null;
     try {
@@ -191,7 +192,7 @@ public class DBList<T> {
               resultSet.getString("vendor"),
               resultSet.getString("unit_of_measurement"),
               resultSet.getDouble("cost_price"),
-              resultSet.getDate("expiry_date"),
+              resultSet.getTimestamp("expiry_date"),
               resultSet.getDate("created_at"));
         } catch (Exception e) {
           // TODO: handle exception
@@ -219,7 +220,7 @@ public class DBList<T> {
         double cost_price = resultSet.getDouble("cost_price");
         double selling_price = resultSet.getDouble("selling_price");
         int sold = resultSet.getInt("sold");
-        Date expiry_date = resultSet.getDate("expiry_date");
+        Date expiry_date = resultSet.getTimestamp("expiry_date");
         Date created_at = resultSet.getDate("created_at");
         String vendor = resultSet.getString("vendor");
         if (name != null) {

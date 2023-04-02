@@ -35,7 +35,7 @@ public class DBQueue<T> {
           "cost_price DECIMAL(10, 2), " +
           "selling_price DECIMAL(10, 2), " +
           "sold INT, " +
-          "expiry_date DATE, " +
+          "expiry_date TIMESTAMP, " +
           "created_at DATE, " +
           "vendor VARCHAR(255)" +
           ")";
@@ -167,7 +167,7 @@ public class DBQueue<T> {
         double cost_price = resultSet.getDouble("cost_price");
         double selling_price = resultSet.getDouble("selling_price");
         int sold = resultSet.getInt("sold");
-        Date expiry_date = resultSet.getDate("expiry_date");
+        Date expiry_date = resultSet.getTimestamp("expiry_date");
         Date created_at = resultSet.getDate("created_at");
         String vendor = resultSet.getString("vendor");
         Item item = new Item(id, name, category, quantity, sold, selling_price, vendor, unit_of_measurement,
@@ -223,7 +223,7 @@ public class DBQueue<T> {
         double cost_price = resultSet.getDouble("cost_price");
         double selling_price = resultSet.getDouble("selling_price");
         int sold = resultSet.getInt("sold");
-        Date expiry_date = resultSet.getDate("expiry_date");
+        Date expiry_date = resultSet.getTimestamp("expiry_date");
         Date created_at = resultSet.getDate("created_at");
         String vendor = resultSet.getString("vendor");
         if (name != null) {

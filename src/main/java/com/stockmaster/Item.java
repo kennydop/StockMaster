@@ -120,7 +120,7 @@ public class Item {
   }
 
   public Date getSqlCreatedAt() {
-    return new java.sql.Date(createdAt.getTime());
+    return new java.sql.Timestamp(createdAt.getTime());
   }
 
   public void setCreatedAt(Date createdAt) {

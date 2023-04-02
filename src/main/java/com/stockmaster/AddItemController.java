@@ -2,6 +2,7 @@ package com.stockmaster;
 
 import java.util.Date;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,6 +33,11 @@ public class AddItemController {
 
   public void initialize() {
     submitItemBtn.setOnAction(this::handleAddButtonClick);
+
+    // get vendors
+    ObservableList<String> options = VendorsController.vendorNames;
+    // Set the options to the ComboBox
+    vendorDropdown.setItems(options);
   }
 
   @FXML
@@ -53,12 +59,9 @@ public class AddItemController {
       stage.close();
     }
 
-    // TODO: parse negative values
   }
 
   public void setSelectedCategory(String category) {
-    System.out.println("Selecting category " + category);
-    System.out.println(category != null && addItemCategoryDropdown != null && category != "All");
     if (category != null && addItemCategoryDropdown != null && category != "All") {
       addItemCategoryDropdown.getSelectionModel().select(category);
     }

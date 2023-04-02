@@ -33,7 +33,7 @@ public class DBStack<T> {
           "cost_price DECIMAL(10, 2), " +
           "selling_price DECIMAL(10, 2), " +
           "sold INT, " +
-          "expiry_date DATE, " +
+          "expiry_date TIMESTAMP, " +
           "created_at DATE, " +
           "vendor VARCHAR(255)" +
           ")";
@@ -148,7 +148,7 @@ public class DBStack<T> {
         double cost_price = result.getDouble("cost_price");
         double selling_price = result.getDouble("selling_price");
         int sold = result.getInt("sold");
-        Date expiry_date = result.getDate("expiry_date");
+        Date expiry_date = result.getTimestamp("expiry_date");
         Date created_at = result.getDate("created_at");
         String vendor = result.getString("vendor");
 
@@ -205,7 +205,7 @@ public class DBStack<T> {
         double cost_price = resultSet.getDouble("cost_price");
         double selling_price = resultSet.getDouble("selling_price");
         int sold = resultSet.getInt("sold");
-        Date expiry_date = resultSet.getDate("expiry_date");
+        Date expiry_date = resultSet.getTimestamp("expiry_date");
         Date created_at = resultSet.getDate("created_at");
         String vendor = resultSet.getString("vendor");
         if (name != null) {
