@@ -49,6 +49,14 @@ public class DBList<T> {
             "issued_date DATE, " +
             "category VARCHAR(255)" +
             ")";
+      } else if (clazz.equals(Bill.class)) {
+        createTableQuery = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+            "id INT UNIQUE, " +
+            "invoice_number INT UNIQUE, " +
+            "issued_to VARCHAR(255), " +
+            "amount_payed DECIMAL(10, 2), " +
+            "issued_date DATE " +
+            ")";
       }
       Statement createTableStatement = connection.createStatement();
       createTableStatement.execute(createTableQuery);
@@ -110,6 +118,17 @@ public class DBList<T> {
               + "')";
         } else {
           insertQuery = "UPDATE " + tableName + " SET " + item.sqlStr() + " WHERE id = " + index;
+        }
+      } else if (clazz.equals(Bill.class)) {
+        Bill bill = (Bill) x;
+        if (index == size) {
+          insertQuery = "INSERT INTO " + tableName
+              + " (id, issued_to, invoice_number, amount_payed, issued_date) VALUES ("
+              + index + ", '" + bill.getIssuedTo() + "', " + bill.getInvoiceNumber() + ", "
+              + bill.getAmountPayed() + ", '"
+              + bill.getLocalDate() + "')";
+        } else {
+          insertQuery = "UPDATE " + tableName + " SET " + bill.sqlStr() + " WHERE id = " + index;
         }
       }
 
@@ -203,7 +222,19 @@ public class DBList<T> {
           updateQuery = "UPDATE " + tableName + " SET "
               + x.sqlStr() + " WHERE id = " + index;
         }
+      } else if (clazz.equals(Bill.class)) {
+        Bill x = (Bill) item;
+        if (index == size) {
+          updateQuery = "INSERT INTO " + tableName
+              + " (id, issued_to, invoice_number, amount_payed, issued_date) VALUES ("
+              + index + ", '" + x.getIssuedTo() + "', " + x.getInvoiceNumber() + ", " + x.getAmountPayed() + ", '"
+              + x.getLocalDate() + "')";
+        } else {
+          updateQuery = "UPDATE " + tableName + " SET "
+              + x.sqlStr() + " WHERE id = " + index;
+        }
       }
+
       PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
       updateStatement.executeUpdate();
     } catch (SQLException e) {
@@ -225,7 +256,6 @@ public class DBList<T> {
       if (resultSet.next()) {
         try {
           if (clazz.equals(Item.class)) {
-
             item = (T) new Item(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
@@ -247,7 +277,15 @@ public class DBList<T> {
                 resultSet.getInt("quantity"),
                 resultSet.getDouble("unit_cost"),
                 resultSet.getString("category"));
+          } else if (clazz.equals(Bill.class)) {
+            item = (T) new Bill(
+                resultSet.getInt("id"),
+                resultSet.getInt("invoice_number"),
+                resultSet.getString("issued_to"),
+                resultSet.getDate("issued_date"),
+                resultSet.getDouble("amount_payed"));
           }
+
         } catch (Exception e) {
           // TODO: handle exception
           e.printStackTrace();
@@ -298,7 +336,19 @@ public class DBList<T> {
             items.add((T) item);
           }
         }
+      } else if (clazz.equals(Bill.class)) {
+        while (resultSet.next()) {
+          int id = resultSet.getInt("id");
+          int invoice_number = resultSet.getInt("invoice_number");
+          String issued_to = resultSet.getString("issued_to");
+          Date issued_date = resultSet.getDate("issued_date");
+          Double amount_payed = resultSet.getDouble("amount_payed");
+
+          Bill bill = new Bill(id, invoice_number, issued_to, issued_date, amount_payed);
+          items.add((T) bill);
+        }
       }
+
     } catch (SQLException e) {
       e.printStackTrace();
     }

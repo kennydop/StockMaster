@@ -106,13 +106,25 @@ public class IssuedGoodsController {
     updateIndexes();
   }
 
+  // public static void removeIssuedItem(int id) {
+  // issuedGoodsList.remove(item.getId());
+  // issuedGoods.remove(item.getId());
+  // issuedGoodsList.remove(0);
+  // issuedGoods.remove(0);
+  // updateIndexes();
+  // }
+
   public static void addIssuedItem(IssuedItem item) {
     issuedGoods.add(item);
   }
 
-  private void updateIndexes() {
+  private static void updateIndexes() {
     for (int i = 0; i < issuedGoodsList.size(); i++) {
       issuedGoodsList.get(i).setId(i);
     }
+  }
+
+  public static IssuedItem getIssuedItemById(int id) {
+    return issuedGoods.get(id);
   }
 }

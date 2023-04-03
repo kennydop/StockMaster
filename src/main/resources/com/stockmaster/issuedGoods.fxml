@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
 
 <VBox BorderPane.alignment="CENTER"
   xmlns="http://javafx.com/javafx/19"
@@ -18,8 +20,14 @@
       <Button fx:id="removeIssuedItemBtn" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" styleClass="remove-btn" stylesheets="@styles.css" text="Remove" textFill="WHITE" />
     </children>
     <VBox.margin>
-      <Insets bottom="20.0" />
+      <Insets bottom="10.0" />
     </VBox.margin>
+  </HBox>
+  <HBox spacing="3.0" stylesheets="@styles.css">
+    <children>
+      <Label style="-fx-font-weight: 600;" styleClass="txt-col" stylesheets="@styles.css" text="Data Structure In Use:" />
+      <Label fx:id="dataStructureInUse" layoutX="10.0" layoutY="10.0" style="-fx-font-weight: 700;" styleClass="txt-col" stylesheets="@styles.css" text="Stack(List)" />
+    </children>
   </HBox>
   <TableView fx:id="issuedGoodsTableView" styleClass="item-table-view" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
     <columns>
@@ -30,6 +38,9 @@
       <TableColumn fx:id="issuedGoodsIssuedDateColumn" editable="false" resizable="false" sortable="false" text="Issued On" />
       <TableColumn fx:id="issuedGoodsSubTotalColumn" editable="false" resizable="false" sortable="false" text="SubTotal" />
     </columns>
+    <VBox.margin>
+      <Insets top="5.0" />
+    </VBox.margin>
   </TableView>
   <padding>
     <Insets left="20.0" right="20.0" top="20.0" />

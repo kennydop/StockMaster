@@ -120,10 +120,12 @@ public class InventoryController {
     itemTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
         // Check the category of the selected item
+        selectedItem = newValue;
         String category = newValue.getCategory();
+        if (selectedCategory == "All")
+          return;
         if (category.equals("Produce") || category.equals("Cleaners") || category.equals("Paper Goods")
             || category.equals("Personal Care")) {
-          selectedItem = newValue;
           addAfterBtn.setVisible(true);
           addBeforeBtn.setVisible(true);
         } else {
@@ -178,6 +180,7 @@ public class InventoryController {
       Parent issueItemRoot = loader.load();
 
       IssueItemController issueItemController = loader.getController();
+      // System.out.println("selected item: \n" + selectedItem.toString());
       issueItemController.itemAlreadySelected(selectedItem);
       toIssue.setName(selectedItem.getName());
       toIssue.setCategory(selectedItem.getCategory());
@@ -216,7 +219,9 @@ public class InventoryController {
         updateIndexes(bakeryItems);
         break;
       case "canned":
+        System.out.println("running...");
         canned.push(item);
+        System.out.println("pushed!");
         cannedItems.add(0, item);
         allItems.add(0, item);
         updateIndexes(cannedItems);
@@ -457,9 +462,11 @@ public class InventoryController {
   }
 
   public static void sell(Item selectedItem) {
-    if (selectedItem == null) {
+    if (selectedItem == null || selectedItem.isNull()) {
       selectedItem = searchForItem(toIssue.getName());
     }
+    if (selectedItem == null)
+      return;
     Item updatedItem = selectedItem;
     updatedItem.setSold((selectedItem.getSold() + toIssue.getQuantity()));
     updatedItem.setQuantity((selectedItem.getQuantity() - toIssue.getQuantity()));
@@ -520,6 +527,8 @@ public class InventoryController {
     }
     IssuedGoodsController.issuedGoodsList.add(0, toIssue);
     IssuedGoodsController.issuedGoods.add(0, toIssue);
+    BillsController.generateBill(toIssue);
+
     DBConnection dbConnection = DBConnection.getInstance();
     dbConnection
         .execSQL("UPDATE " + table + " SET sold = " + (selectedItem.getSold() + toIssue.getQuantity()) + ", quantity = "

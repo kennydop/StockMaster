@@ -8,14 +8,14 @@ import javafx.collections.ObservableList;
 
 public class DBStack<T> {
   private Connection connection;
-  private int top;
+  private Integer top;
   private int capacity;
   private String tableName;
 
   public DBStack(int size, String tableName) {
     try {
       this.capacity = size;
-      this.top = -1;
+      this.top = null;
       this.tableName = tableName;
 
       // Connect to the database
@@ -53,19 +53,11 @@ public class DBStack<T> {
       }
 
       // Get the top index
-      String topSelectionQuery = "SELECT * FROM " + tableName;
+      String topSelectionQuery = "SELECT COUNT(*) FROM " + tableName + " WHERE name IS NULL";
       Statement topSelectionStatement = connection.createStatement();
       ResultSet topSelectionResult = topSelectionStatement.executeQuery(topSelectionQuery);
-      while (topSelectionResult.next()) {
-        if (topSelectionResult.getString("name") == null) {
-          top++;
-        } else {
-          top++;
-          break;
-        }
-      }
-      if (isEmpty()) {
-        top = -1;
+      if (topSelectionResult.next()) {
+        top = topSelectionResult.getInt(1);
       }
 
       // If the stack is empty, fill it with null data
@@ -93,6 +85,9 @@ public class DBStack<T> {
       expandStackSize();
     }
     String updateQuery = "";
+    System.out.println(x.getClass().getName());
+    System.out.println(x.getClass().getName().equals("com.stockmaster.Item"));
+    System.out.println(top);
     if (x.getClass().getName().equals("com.stockmaster.Item")) {
       Item item = (Item) x;
       updateQuery = "UPDATE " + tableName + " SET " + item.sqlStr() + " WHERE id = " + (top - 1);

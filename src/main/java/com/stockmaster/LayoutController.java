@@ -23,12 +23,15 @@ public class LayoutController implements Initializable {
   Button vendorsBtn;
   @FXML
   Button issuedGoodsBtn;
+  @FXML
+  Button billsBtn;
 
   private Node currentCenterNode; // the default center node for the dashboard
   private Node dashboardNode;
   private Node inventoryNode;
   private Node vendorsNode;
   private Node issuedGoodsNode;
+  private Node billsNode;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -48,6 +51,10 @@ public class LayoutController implements Initializable {
       // load the issueGoods node
       FXMLLoader issuedGoodsLoader = new FXMLLoader(getClass().getResource("issuedGoods.fxml"));
       issuedGoodsNode = issuedGoodsLoader.load();
+
+      // load the issueGoods node
+      FXMLLoader billsLoader = new FXMLLoader(getClass().getResource("bills.fxml"));
+      billsNode = billsLoader.load();
 
     } catch (IOException e) {
       // TODO Auto-generated catch block
@@ -85,6 +92,12 @@ public class LayoutController implements Initializable {
       setClicked(issuedGoodsBtn);
     });
 
+    billsBtn.setOnAction(event -> {
+      rootPane.setCenter(billsNode);
+      currentCenterNode = billsNode;
+      setClicked(billsBtn);
+    });
+
     Platform.runLater(() -> rootPane.requestFocus());
   }
 
@@ -93,6 +106,7 @@ public class LayoutController implements Initializable {
     inventoryBtn.getStyleClass().remove("clicked");
     vendorsBtn.getStyleClass().remove("clicked");
     issuedGoodsBtn.getStyleClass().remove("clicked");
+    billsBtn.getStyleClass().remove("clicked");
     btn.getStyleClass().add("clicked");
   }
 }
