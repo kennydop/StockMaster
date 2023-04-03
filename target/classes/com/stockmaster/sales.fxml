@@ -1,0 +1,60 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane hgap="20" vgap="20" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styles.css">
+    <columnConstraints>
+        <ColumnConstraints percentWidth="50" />
+        <ColumnConstraints percentWidth="50" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints percentHeight="33" />
+        <RowConstraints percentHeight="33" />
+        <RowConstraints percentHeight="33" />
+    </rowConstraints>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <VBox fx:id="kpiBox" GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="10">
+        <Label text="Total Revenue:" />
+        <!-- <Label fx:id="totalRevenue" text="$12,345" /> -->
+        <Label text="Profit Margin:" />
+        <Label fx:id="profitMargin" text="25%" />
+        <Label text="Number of Sales:" />
+        <Label fx:id="numSales" text="120" />
+    </VBox>
+
+    <DatePicker fx:id="dateRangePicker" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+    <BarChart fx:id="salesBarChart" GridPane.columnIndex="0" GridPane.rowIndex="1" title="Sales by Category">
+        <xAxis>
+            <CategoryAxis label="Category" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Sales" />
+        </yAxis>
+    </BarChart>
+
+    <LineChart fx:id="salesLineChart" GridPane.columnIndex="1" GridPane.rowIndex="1" title="Sales Trend">
+        <xAxis>
+            <CategoryAxis label="Time" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Sales" />
+        </yAxis>
+    </LineChart>
+
+    <PieChart fx:id="salesPieChart" GridPane.columnIndex="0" GridPane.rowIndex="2" title="Sales by Channel" />
+
+</GridPane> -->

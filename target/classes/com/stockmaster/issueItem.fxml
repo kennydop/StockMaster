@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane stylesheets="@styles.css" BorderPane.alignment="CENTER"
+  xmlns="http://javafx.com/javafx/19"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.IssueItemController">
+  <VBox alignment="CENTER" fillWidth="false" stylesheets="@styles.css" StackPane.alignment="TOP_CENTER">
+    <VBox alignment="CENTER_RIGHT" spacing="30.0" style="-fx-background-color: white;">
+      <children>
+        <GridPane hgap="10" vgap="10">
+          <Label text="Issued Date" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <DatePicker fx:id="issuedDatePicker" prefWidth="300.0" styleClass="" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+          <Label text="Issued To" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="issuedToField" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+          <Label text="Quantity" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <TextField fx:id="issuedQuantityField" styleClass="txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+          <Label fx:id="itemToIssueLabel" text="Item" GridPane.columnIndex="0" GridPane.rowIndex="4">
+            <font>
+              <Font size="13.0" />
+            </font>
+          </Label>
+          <ComboBox fx:id="itemToIssue" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+          <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+          </rowConstraints>
+        </GridPane>
+        <Button fx:id="issueItemBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="btn" stylesheets="@styles.css" text="Issue Item" textFill="WHITE" />
+      </children>
+      <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+    </VBox>
+    <StackPane.margin>
+      <Insets />
+    </StackPane.margin>
+  </VBox>
+  <BorderPane.margin>
+    <Insets />
+  </BorderPane.margin>
+</StackPane>

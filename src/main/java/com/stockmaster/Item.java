@@ -12,7 +12,6 @@ public class Item {
   private int sold = 0;
   private double sellingPrice;
   private String vendor;
-  // private int vendorId;
   private String unitOfMeasurement;
   private double costPrice;
   private Date expiryDate;
@@ -120,7 +119,7 @@ public class Item {
   }
 
   public Date getSqlCreatedAt() {
-    return new java.sql.Timestamp(createdAt.getTime());
+    return new java.sql.Date(createdAt.getTime());
   }
 
   public void setCreatedAt(Date createdAt) {

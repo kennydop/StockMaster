@@ -39,7 +39,7 @@ public class InventoryController {
   @FXML
   private Button addBeforeBtn;
   @FXML
-  private Button addPurchaseBtn;
+  private Button issueItemBtn;
   @FXML
   private Button removeItemBtn;
   @FXML
@@ -48,37 +48,38 @@ public class InventoryController {
   private Label dataStructureInUse;
 
   String selectedCategory = "All";
-  private int selectedListIndex = -1;
-  ObservableList<Item> allItems = FXCollections.observableArrayList();
+  public static Item selectedItem = Item.nullItem();
+  private static ObservableList<Item> allItems = FXCollections.observableArrayList();
   protected static Item toAdd = Item.nullItem();
+  protected static IssuedItem toIssue = IssuedItem.nullItem();
 
   // Instanciate Stacks
   private DBStack<Item> beverages = new DBStack<Item>(5, "beverages");
-  private ObservableList<Item> beverageItems;
+  private static ObservableList<Item> beverageItems;
   private DBStack<Item> bakery = new DBStack<Item>(5, "bakery");
-  private ObservableList<Item> bakeryItems;
+  private static ObservableList<Item> bakeryItems;
   private DBStack<Item> canned = new DBStack<Item>(5, "canned");
-  private ObservableList<Item> cannedItems;
+  private static ObservableList<Item> cannedItems;
   private DBStack<Item> dairy = new DBStack<Item>(5, "dairy");
-  private ObservableList<Item> dairyItems;
+  private static ObservableList<Item> dairyItems;
 
   // Instantiate Queues
   private DBQueue<Item> dry = new DBQueue<Item>(5, "dry");
-  private ObservableList<Item> dryItems;
+  private static ObservableList<Item> dryItems;
   private DBQueue<Item> frozen = new DBQueue<Item>(5, "frozen");
-  private ObservableList<Item> frozenItems;
+  private static ObservableList<Item> frozenItems;
   private DBQueue<Item> meat = new DBQueue<Item>(5, "meat");
-  private ObservableList<Item> meatItems;
+  private static ObservableList<Item> meatItems;
 
   // Instanciate Stacks
-  private DBList<Item> produce = new DBList<Item>("produce");
-  private ObservableList<Item> produceItems;
-  private DBList<Item> cleaners = new DBList<Item>("cleaners");
-  private ObservableList<Item> cleanersItems;
-  private DBList<Item> paper = new DBList<Item>("paper");
-  private ObservableList<Item> paperItems;
-  private DBList<Item> personal = new DBList<Item>("personal");
-  private ObservableList<Item> personalItems;
+  private DBList<Item> produce = new DBList<Item>("produce", Item.class);
+  private static ObservableList<Item> produceItems;
+  private DBList<Item> cleaners = new DBList<Item>("cleaners", Item.class);
+  private static ObservableList<Item> cleanersItems;
+  private DBList<Item> paper = new DBList<Item>("paper", Item.class);
+  private static ObservableList<Item> paperItems;
+  private DBList<Item> personal = new DBList<Item>("personal", Item.class);
+  private static ObservableList<Item> personalItems;
 
   public void initialize() {
     // Hide list buttons initially
@@ -122,7 +123,7 @@ public class InventoryController {
         String category = newValue.getCategory();
         if (category.equals("Produce") || category.equals("Cleaners") || category.equals("Paper Goods")
             || category.equals("Personal Care")) {
-          selectedListIndex = newValue.getId();
+          selectedItem = newValue;
           addAfterBtn.setVisible(true);
           addBeforeBtn.setVisible(true);
         } else {
@@ -130,18 +131,18 @@ public class InventoryController {
           addBeforeBtn.setVisible(false);
         }
       } else {
-        // No item is selected, hide the button
-        selectedListIndex = -1;
+        // No item is selected
+        selectedItem = Item.nullItem();
         addAfterBtn.setVisible(false);
         addBeforeBtn.setVisible(false);
       }
     });
 
     addItemBtn.setOnAction(e -> openAddItemPopup(-1));
-    addPurchaseBtn.setOnAction(e -> openAddPurchasePopup());
+    issueItemBtn.setOnAction(e -> openIssueItemPopup());
     removeItemBtn.setOnAction(e -> removeItem());
-    addAfterBtn.setOnAction(e -> openAddItemPopup(selectedListIndex + 1));
-    addBeforeBtn.setOnAction(e -> openAddItemPopup(selectedListIndex));
+    addAfterBtn.setOnAction(e -> openAddItemPopup(selectedItem.getId() + 1));
+    addBeforeBtn.setOnAction(e -> openAddItemPopup(selectedItem.getId()));
   }
 
   private void openAddItemPopup(int index) {
@@ -170,29 +171,38 @@ public class InventoryController {
     }
   }
 
-  private void openAddPurchasePopup() {
+  private void openIssueItemPopup() {
     try {
-      // Load the addItem.fxml file
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("addPurchase.fxml"));
-      Parent addItemRoot = loader.load();
+      // Load the issueItem.fxml file
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("issueItem.fxml"));
+      Parent issueItemRoot = loader.load();
+
+      IssueItemController issueItemController = loader.getController();
+      issueItemController.itemAlreadySelected(selectedItem);
+      toIssue.setName(selectedItem.getName());
+      toIssue.setCategory(selectedItem.getCategory());
+      toIssue.setUnitCost(selectedItem.getSellingPrice());
 
       // Create a new stage for the popup
-      Stage addItemStage = new Stage();
-      addItemStage.initModality(Modality.APPLICATION_MODAL);
-      addItemStage.setTitle("Add Purchase");
-      addItemStage.setScene(new Scene(addItemRoot));
-      addItemStage.setResizable(false);
+      Stage issueItemStage = new Stage();
+      issueItemStage.initModality(Modality.APPLICATION_MODAL);
+      issueItemStage.setTitle("Issue " + selectedItem.getName());
+      issueItemStage.setScene(new Scene(issueItemRoot));
+      issueItemStage.setResizable(false);
 
       // Show the popup and wait for it to be closed
-      addItemStage.showAndWait();
+      issueItemStage.showAndWait();
+      sell();
+      toIssue = IssuedItem.nullItem();
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   private void addItem(int index, Item item) {
-    System.out.println("adding " + item.getName() + " to " + item.getCategory().toLowerCase().split("/")[0]);
-    switch (item.getCategory().toLowerCase().split("/")[0]) {
+    System.out.println("adding " + item.getName() + " to " + item.getCategory().toLowerCase().split("/")[0]
+        .split(" ")[0]);
+    switch (item.getCategory().toLowerCase().split("/")[0].split(" ")[0]) {
       case "beverages":
         beverages.push(item);
         beverageItems.add(0, item);
@@ -261,7 +271,7 @@ public class InventoryController {
           updateIndexes(cleanersItems);
         }
         break;
-      case "paper goods":
+      case "paper":
         if (index == -1) {
           paper.add(item);
           paperItems.add(item);
@@ -274,7 +284,7 @@ public class InventoryController {
           updateIndexes(paperItems);
         }
         break;
-      case "personal care":
+      case "personal":
         if (index == -1) {
           personal.add(item);
           personalItems.add(item);
@@ -298,9 +308,10 @@ public class InventoryController {
   private void removeItem() {
     if (selectedCategory == "All" || allItems.size() < 1)
       return;
-    System.out.println("removing item from " + selectedCategory.toLowerCase().toLowerCase().split("/")[0] + "...");
+    System.out.println(
+        "removing item from " + selectedCategory.toLowerCase().toLowerCase().split("/")[0].split(" ")[0] + "...");
     Item removedItem = null;
-    switch (selectedCategory.toLowerCase().toLowerCase().split("/")[0]) {
+    switch (selectedCategory.toLowerCase().toLowerCase().split("/")[0].split(" ")[0]) {
       case "beverages":
         beverages.pop();
         removedItem = beverageItems.remove(0);
@@ -329,20 +340,20 @@ public class InventoryController {
         meat.dequeue();
         removedItem = meatItems.remove(0);
       case "produce":
-        produce.remove(selectedListIndex);
-        removedItem = produceItems.remove(selectedListIndex);
+        produce.remove(selectedItem.getId());
+        removedItem = produceItems.remove(selectedItem.getId());
         updateIndexes(produceItems);
       case "cleaners":
-        cleaners.remove(selectedListIndex);
-        removedItem = cleanersItems.remove(selectedListIndex);
+        cleaners.remove(selectedItem.getId());
+        removedItem = cleanersItems.remove(selectedItem.getId());
         updateIndexes(cleanersItems);
-      case "paper goods":
-        paper.remove(selectedListIndex);
-        removedItem = paperItems.remove(selectedListIndex);
+      case "paper":
+        paper.remove(selectedItem.getId());
+        removedItem = paperItems.remove(selectedItem.getId());
         updateIndexes(paperItems);
-      case "personal care":
-        personal.remove(selectedListIndex);
-        removedItem = personalItems.remove(selectedListIndex);
+      case "personal":
+        personal.remove(selectedItem.getId());
+        removedItem = personalItems.remove(selectedItem.getId());
         updateIndexes(personalItems);
         break;
       default:
@@ -379,7 +390,7 @@ public class InventoryController {
 
   private void handleCategoryChange(String category) {
     selectedCategory = category;
-    switch (category.toLowerCase().split("/")[0]) {
+    switch (category.toLowerCase().split("/")[0].split(" ")[0]) {
       case "beverages":
         itemTableView.setItems(beverageItems);
         dataStructureInUse.setText("Stack");
@@ -416,11 +427,11 @@ public class InventoryController {
         itemTableView.setItems(cleanersItems);
         dataStructureInUse.setText("List");
         break;
-      case "paper goods":
+      case "paper":
         itemTableView.setItems(paperItems);
         dataStructureInUse.setText("List");
         break;
-      case "personal care":
+      case "personal":
         itemTableView.setItems(personalItems);
         dataStructureInUse.setText("List");
         break;
@@ -439,5 +450,123 @@ public class InventoryController {
     for (int i = 0; i < items.size(); i++) {
       items.get(i).setId(i);
     }
+  }
+
+  public void sell() {
+    sell(selectedItem);
+  }
+
+  public static void sell(Item selectedItem) {
+    if (selectedItem == null) {
+      selectedItem = searchForItem(toIssue.getName());
+    }
+    Item updatedItem = selectedItem;
+    updatedItem.setSold((selectedItem.getSold() + toIssue.getQuantity()));
+    updatedItem.setQuantity((selectedItem.getQuantity() - toIssue.getQuantity()));
+    String table = selectedItem.getCategory().toLowerCase().split("/")[0].split(" ")[0];
+    switch (table) {
+      case "beverages":
+        beverageItems.set(selectedItem.getId(), updatedItem);
+        table = "beverages";
+        break;
+      case "bakery":
+        bakeryItems.set(selectedItem.getId(), updatedItem);
+        table = "bakery";
+        break;
+      case "canned":
+        cannedItems.set(selectedItem.getId(), updatedItem);
+        table = "canned";
+        break;
+      case "dairy":
+        dairyItems.set(selectedItem.getId(), updatedItem);
+        table = "dairy";
+        break;
+      case "dry":
+        dryItems.set(selectedItem.getId(), updatedItem);
+        table = "dry";
+        break;
+      case "frozen":
+        frozenItems.set(selectedItem.getId(), updatedItem);
+        table = "frozen";
+        break;
+      case "meat":
+        meatItems.set(selectedItem.getId(), updatedItem);
+        table = "meat";
+        break;
+      case "produce":
+        produceItems.set(selectedItem.getId(), updatedItem);
+        table = "produce";
+        break;
+      case "cleaners":
+        cleanersItems.set(selectedItem.getId(), updatedItem);
+        table = "cleaners";
+        break;
+      case "paper":
+        paperItems.set(selectedItem.getId(), updatedItem);
+        table = "paper";
+        break;
+      case "personal":
+        personalItems.set(selectedItem.getId(), updatedItem);
+        table = "personal";
+        break;
+      default:
+        break;
+    }
+    for (int i = 0; i < allItems.size(); i++) {
+      if (allItems.get(i) == selectedItem) {
+        allItems.set(i, updatedItem);
+        break;
+      }
+    }
+    IssuedGoodsController.issuedGoodsList.add(0, toIssue);
+    IssuedGoodsController.issuedGoods.add(0, toIssue);
+    DBConnection dbConnection = DBConnection.getInstance();
+    dbConnection
+        .execSQL("UPDATE " + table + " SET sold = " + (selectedItem.getSold() + toIssue.getQuantity()) + ", quantity = "
+            + (selectedItem.getQuantity() - toIssue.getQuantity()) + " WHERE id = " + selectedItem.getId());
+  }
+
+  public static String searchForItemCategory(String name) {
+    for (int i = 0; i < allItems.size(); i++) {
+      Item item = allItems.get(i);
+      if (item.getName().equals(name))
+        return item.getCategory();
+    }
+    return null;
+  }
+
+  public static double searchForItemSellingPrice(String name) {
+    for (int i = 0; i < allItems.size(); i++) {
+      Item item = allItems.get(i);
+      if (item.getName().equals(name))
+        return item.getSellingPrice();
+    }
+    return -1;
+  }
+
+  public static int searchForItemQuantity(String name) {
+    for (int i = 0; i < allItems.size(); i++) {
+      Item item = allItems.get(i);
+      if (item.getName().equals(name))
+        return item.getQuantity();
+    }
+    return -1;
+  }
+
+  public static Item searchForItem(String name) {
+    for (int i = 0; i < allItems.size(); i++) {
+      Item item = allItems.get(i);
+      if (item.getName().equals(name))
+        return item;
+    }
+    return null;
+  }
+
+  public static ObservableList<String> getAllItemNames() {
+    ObservableList<String> names = FXCollections.observableArrayList();
+    for (int i = 0; i < allItems.size(); i++) {
+      names.add(allItems.get(i).getName());
+    }
+    return names;
   }
 }

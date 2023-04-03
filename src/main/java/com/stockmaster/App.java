@@ -20,7 +20,7 @@ public class App extends Application {
 
   @Override
   public void init() {
-    DBConnection dbConnection = new DBConnection();
+    DBConnection dbConnection = DBConnection.getInstance();
     connection = dbConnection.setupDatabaseConnection();
   }
 

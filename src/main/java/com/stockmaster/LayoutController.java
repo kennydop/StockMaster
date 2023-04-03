@@ -22,13 +22,13 @@ public class LayoutController implements Initializable {
   @FXML
   Button vendorsBtn;
   @FXML
-  Button customersBtn;
+  Button issuedGoodsBtn;
 
   private Node currentCenterNode; // the default center node for the dashboard
   private Node dashboardNode;
   private Node inventoryNode;
   private Node vendorsNode;
-  private Node customersNode;
+  private Node issuedGoodsNode;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -45,9 +45,9 @@ public class LayoutController implements Initializable {
       FXMLLoader vendorsLoader = new FXMLLoader(getClass().getResource("vendors.fxml"));
       vendorsNode = vendorsLoader.load();
 
-      // load the customers node
-      FXMLLoader customersLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
-      customersNode = customersLoader.load();
+      // load the issueGoods node
+      FXMLLoader issuedGoodsLoader = new FXMLLoader(getClass().getResource("issuedGoods.fxml"));
+      issuedGoodsNode = issuedGoodsLoader.load();
 
     } catch (IOException e) {
       // TODO Auto-generated catch block
@@ -67,7 +67,6 @@ public class LayoutController implements Initializable {
       setClicked(dashboardBtn);
     });
 
-
     inventoryBtn.setOnAction(event -> {
       rootPane.setCenter(inventoryNode);
       currentCenterNode = inventoryNode;
@@ -80,13 +79,11 @@ public class LayoutController implements Initializable {
       setClicked(vendorsBtn);
     });
 
-    customersBtn.setOnAction(event -> {
-      rootPane.setCenter(customersNode);
-      currentCenterNode = customersNode;
-      setClicked(customersBtn);
+    issuedGoodsBtn.setOnAction(event -> {
+      rootPane.setCenter(issuedGoodsNode);
+      currentCenterNode = issuedGoodsNode;
+      setClicked(issuedGoodsBtn);
     });
-
-
 
     Platform.runLater(() -> rootPane.requestFocus());
   }
@@ -95,7 +92,7 @@ public class LayoutController implements Initializable {
     dashboardBtn.getStyleClass().remove("clicked");
     inventoryBtn.getStyleClass().remove("clicked");
     vendorsBtn.getStyleClass().remove("clicked");
-    customersBtn.getStyleClass().remove("clicked");
+    issuedGoodsBtn.getStyleClass().remove("clicked");
     btn.getStyleClass().add("clicked");
   }
 }
