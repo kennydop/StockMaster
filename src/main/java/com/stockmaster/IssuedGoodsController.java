@@ -1,6 +1,8 @@
 package com.stockmaster;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -126,5 +128,29 @@ public class IssuedGoodsController {
 
   public static IssuedItem getIssuedItemById(int id) {
     return issuedGoods.get(id);
+  }
+
+  public static int getSales() {
+    int sales = 0;
+    for (IssuedItem item : issuedGoodsList) {
+      sales += item.getQuantity();
+    }
+    return sales;
+  }
+
+  public static double getRevenue() {
+    double revenue = 0;
+    for (IssuedItem item : issuedGoodsList) {
+      revenue += item.getQuantity() * item.getUnitCost();
+    }
+    return revenue;
+  }
+
+  public static int getTotalCustomers() {
+    Set<String> customers = new HashSet<>();
+    for (IssuedItem item : issuedGoodsList) {
+      customers.add(item.getIssuedTo());
+    }
+    return customers.size();
   }
 }

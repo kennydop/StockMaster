@@ -1,6 +1,7 @@
 package com.stockmaster;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -577,5 +578,41 @@ public class InventoryController {
       names.add(allItems.get(i).getName());
     }
     return names;
+  }
+
+  public static int getTotalStock() {
+    int total = 0;
+    for (int i = 0; i < allItems.size(); i++) {
+      total += allItems.get(i).getQuantity();
+    }
+    return total;
+  }
+
+  public static int getLowStockedItem() {
+    int total = Integer.MAX_VALUE;
+    for (int i = 0; i < allItems.size(); i++) {
+      if (allItems.get(i).getQuantity() < total)
+        total = allItems.get(i).getQuantity();
+    }
+    return total;
+  }
+
+  public static int getHighStockedItem() {
+    int total = 0;
+    for (int i = 0; i < allItems.size(); i++) {
+      if (allItems.get(i).getQuantity() > total)
+        total = allItems.get(i).getQuantity();
+    }
+    return total;
+  }
+
+  public static int getTotalExpiredItems() {
+    int total = 0;
+    Date currentDate = new Date();
+    for (int i = 0; i < allItems.size(); i++) {
+      if (allItems.get(i).getExpiryDate().before(currentDate))
+        total += allItems.get(i).getQuantity();
+    }
+    return total;
   }
 }

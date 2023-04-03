@@ -119,4 +119,8 @@ public class VendorsController {
   public void fetchVendorNames() {
     vendorNames = vendors.getVendors(true);
   }
+
+  public static int getTotalVendors() {
+    return vendorNames.size();
+  }
 }

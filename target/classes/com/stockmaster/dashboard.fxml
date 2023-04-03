@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <ScrollPane xmlns="http://javafx.com/javafx/19"
-  xmlns:fx="http://javafx.com/fxml/1">
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.DashboardController">
   <content>
     <VBox spacing="5.0">
       <children>
@@ -45,25 +45,25 @@
                     <VBox>
                       <children>
                         <Label styleClass="text" stylesheets="@styles.css" text="Sales" />
-                        <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                        <Label fx:id="sales" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                       </children>
                     </VBox>
                     <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                       <children>
                         <Label styleClass="text" stylesheets="@styles.css" text="Profit" />
-                        <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                        <Label fx:id="profit" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                       </children>
                     </VBox>
                     <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
                       <children>
                         <Label styleClass="text" stylesheets="@styles.css" text="Cost" />
-                        <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                        <Label fx:id="sCost" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                       </children>
                     </VBox>
                     <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
                       <children>
                         <Label styleClass="text" stylesheets="@styles.css" text="Revenue" />
-                        <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                        <Label fx:id="sRevenue" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                       </children>
                     </VBox>
                   </children>
@@ -102,25 +102,25 @@
                       <VBox>
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Purchases" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="purchase" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Returns" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="pRevenue" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Cost" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="pCost" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Cancelled" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="cancelled" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                     </children>
@@ -160,25 +160,25 @@
                       <VBox>
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Total Stock" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="totalStock" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="High Stock Item" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="hstockItem" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Low Stock Item" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="lstockItem" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Expired" />
-                          <Label styleClass="text-4xl" stylesheets="@styles.css" text="440" />
+                          <Label fx:id="expired" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                     </children>
@@ -206,7 +206,7 @@
               </styleClass>
               <children>
                 <Label styleClass="text" text="Total Vendors" StackPane.alignment="CENTER_LEFT" />
-                <Label layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+                <Label fx:id="totalVendor" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
               </children>
               <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -220,7 +220,7 @@
               </styleClass>
               <children>
                 <Label styleClass="text" text="Total Customers" StackPane.alignment="CENTER_LEFT" />
-                <Label layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+                <Label fx:id="totalCustomers" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
               </children>
               <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -234,7 +234,7 @@
               </styleClass>
               <children>
                 <Label styleClass="text" text="Total Suppliers" StackPane.alignment="CENTER_LEFT" />
-                <Label layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+                <Label fx:id="totalSuppliers" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
               </children>
               <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

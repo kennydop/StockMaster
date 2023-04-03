@@ -85,9 +85,6 @@ public class DBStack<T> {
       expandStackSize();
     }
     String updateQuery = "";
-    System.out.println(x.getClass().getName());
-    System.out.println(x.getClass().getName().equals("com.stockmaster.Item"));
-    System.out.println(top);
     if (x.getClass().getName().equals("com.stockmaster.Item")) {
       Item item = (Item) x;
       updateQuery = "UPDATE " + tableName + " SET " + item.sqlStr() + " WHERE id = " + (top - 1);
