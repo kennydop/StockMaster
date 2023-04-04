@@ -56,8 +56,8 @@
                     </VBox>
                     <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
                       <children>
-                        <Label styleClass="text" stylesheets="@styles.css" text="Cost" />
-                        <Label fx:id="sCost" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
+                        <Label styleClass="text" stylesheets="@styles.css" text="Spent" />
+                        <Label fx:id="spent" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                       </children>
                     </VBox>
                     <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
@@ -108,7 +108,7 @@
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <children>
                           <Label styleClass="text" stylesheets="@styles.css" text="Returns" />
-                          <Label fx:id="pRevenue" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
+                          <Label fx:id="returns" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
                         </children>
                       </VBox>
                       <VBox layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">

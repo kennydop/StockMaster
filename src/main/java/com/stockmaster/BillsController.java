@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -27,7 +29,7 @@ public class BillsController {
   @FXML
   private TableColumn<Bill, Double> totalAmountColumn;
   @FXML
-  private TableColumn<Bill, Date> issuedDateColumn;
+  private TableColumn<Bill, LocalDate> issuedDateColumn;
   @FXML
   private Button removeBillBtn;
 
@@ -71,7 +73,7 @@ public class BillsController {
   // Other fields and methods ...
 
   public static Bill generateBill(IssuedItem issuedItem) {
-    int uniqueInvoiceNumber = generateInvoiceNumber();
+    String uniqueInvoiceNumber = UniqueRandomCodeGenerator.generateUniqueRandomCode();
     Bill bill = new Bill(-1, uniqueInvoiceNumber, issuedItem.getIssuedTo(), issuedItem.getIssuedDate(), issuedItem
         .getUnitCost() * issuedItem.getQuantity());
     billsList.add(0, bill);
@@ -83,13 +85,5 @@ public class BillsController {
     for (int i = 0; i < billsList.size(); i++) {
       billsList.get(i).setId(i);
     }
-  }
-
-  private static int generateInvoiceNumber() {
-    LocalDateTime now = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddHHmmss");
-    String formattedDateTime = now.format(formatter);
-    int generatedNumber = Integer.parseInt(formattedDateTime) % 1000000;
-    return generatedNumber;
   }
 }

@@ -1,7 +1,11 @@
 package com.stockmaster;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,7 +56,7 @@ public class DBList<T> {
       } else if (clazz.equals(Bill.class)) {
         createTableQuery = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
             "id INT UNIQUE, " +
-            "invoice_number INT UNIQUE, " +
+            "invoice_code VARCHAR(255), " +
             "issued_to VARCHAR(255), " +
             "amount_payed DECIMAL(10, 2), " +
             "issued_date DATE " +
@@ -114,7 +118,7 @@ public class DBList<T> {
           insertQuery = "INSERT INTO " + tableName
               + " (id, name, issued_to, quantity, unit_cost, issued_date, category) VALUES ("
               + index + ", '" + item.getName() + "', '" + item.getIssuedTo() + "', " + item.getQuantity() + ", "
-              + item.getUnitCost() + ", '" + item.getIssuedLocalDate() + "', '" + item.getCategory()
+              + item.getUnitCost() + ", '" + item.getSqlDate() + "', '" + item.getCategory()
               + "')";
         } else {
           insertQuery = "UPDATE " + tableName + " SET " + item.sqlStr() + " WHERE id = " + index;
@@ -123,8 +127,8 @@ public class DBList<T> {
         Bill bill = (Bill) x;
         if (index == size) {
           insertQuery = "INSERT INTO " + tableName
-              + " (id, issued_to, invoice_number, amount_payed, issued_date) VALUES ("
-              + index + ", '" + bill.getIssuedTo() + "', " + bill.getInvoiceNumber() + ", "
+              + " (id, issued_to, invoice_code, amount_payed, issued_date) VALUES ("
+              + index + ", '" + bill.getIssuedTo() + "', '" + bill.getInvoiceNumber() + "', "
               + bill.getAmountPayed() + ", '"
               + bill.getLocalDate() + "')";
         } else {
@@ -216,7 +220,7 @@ public class DBList<T> {
           updateQuery = "INSERT INTO " + tableName
               + " (id, name, issued_to, quantity, unit_cost, issued_date, category) VALUES ("
               + index + ", '" + x.getName() + "', '" + x.getIssuedTo() + "', " + x.getQuantity() + ", "
-              + x.getUnitCost() + ", '" + x.getIssuedLocalDate() + "', '" + x.getCategory()
+              + x.getUnitCost() + ", '" + x.getSqlDate() + "', '" + x.getCategory()
               + "')";
         } else {
           updateQuery = "UPDATE " + tableName + " SET "
@@ -226,8 +230,8 @@ public class DBList<T> {
         Bill x = (Bill) item;
         if (index == size) {
           updateQuery = "INSERT INTO " + tableName
-              + " (id, issued_to, invoice_number, amount_payed, issued_date) VALUES ("
-              + index + ", '" + x.getIssuedTo() + "', " + x.getInvoiceNumber() + ", " + x.getAmountPayed() + ", '"
+              + " (id, issued_to, invoice_code, amount_payed, issued_date) VALUES ("
+              + index + ", '" + x.getIssuedTo() + "', '" + x.getInvoiceNumber() + "', " + x.getAmountPayed() + ", '"
               + x.getLocalDate() + "')";
         } else {
           updateQuery = "UPDATE " + tableName + " SET "
@@ -280,7 +284,7 @@ public class DBList<T> {
           } else if (clazz.equals(Bill.class)) {
             item = (T) new Bill(
                 resultSet.getInt("id"),
-                resultSet.getInt("invoice_number"),
+                resultSet.getString("invoice_code"),
                 resultSet.getString("issued_to"),
                 resultSet.getDate("issued_date"),
                 resultSet.getDouble("amount_payed"));
@@ -337,16 +341,19 @@ public class DBList<T> {
           }
         }
       } else if (clazz.equals(Bill.class)) {
+        Set<String> invoice_codes = new HashSet<String>();
         while (resultSet.next()) {
           int id = resultSet.getInt("id");
-          int invoice_number = resultSet.getInt("invoice_number");
+          String invoice_code = resultSet.getString("invoice_code");
           String issued_to = resultSet.getString("issued_to");
           Date issued_date = resultSet.getDate("issued_date");
           Double amount_payed = resultSet.getDouble("amount_payed");
 
-          Bill bill = new Bill(id, invoice_number, issued_to, issued_date, amount_payed);
+          Bill bill = new Bill(id, invoice_code, issued_to, issued_date, amount_payed);
           items.add((T) bill);
+          invoice_codes.add(invoice_code);
         }
+        UniqueRandomCodeGenerator.setGeneratedCodes(invoice_codes);
       }
 
     } catch (SQLException e) {

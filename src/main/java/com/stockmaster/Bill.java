@@ -1,16 +1,15 @@
 package com.stockmaster;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Bill {
   private int id;
-  private int invoiceNumber;
+  private String invoiceNumber;
   private String issuedTo;
   private Date issuedDate;
   private Double amountPayed;
 
-  public Bill(int id, int invoiceNumber, String issuedTo, Date issuedDate, Double amountPayed) {
+  public Bill(int id, String invoiceNumber, String issuedTo, Date issuedDate, Double amountPayed) {
     this.id = id;
     this.invoiceNumber = invoiceNumber;
     this.issuedTo = issuedTo;
@@ -26,11 +25,11 @@ public class Bill {
     this.id = id;
   }
 
-  public int getInvoiceNumber() {
+  public String getInvoiceNumber() {
     return invoiceNumber;
   }
 
-  public void setInvoiceNumber(int invoiceNumber) {
+  public void setInvoiceNumber(String invoiceNumber) {
     this.invoiceNumber = invoiceNumber;
   }
 
@@ -70,7 +69,7 @@ public class Bill {
 
   public String sqlStr() {
     java.sql.Date issuedSqlDate = new java.sql.Date(issuedDate.getTime());
-    return "invoice_number = " + invoiceNumber + "issued_to = " + issuedTo + "amount_payed = " + amountPayed
+    return "invoice_code = '" + invoiceNumber + "', issued_to = '" + issuedTo + "', amount_payed = " + amountPayed
         + ", issued_date = '"
         + issuedSqlDate + "'";
   }

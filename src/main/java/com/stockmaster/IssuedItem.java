@@ -11,6 +11,7 @@ public class IssuedItem {
   private int quantity;
   private double unitCost;
   private Date issuedDate;
+  private LocalDate issuedLocalDate;
   private String category;
 
   public IssuedItem(int id, String name, String issuedTo, Date issuedDate, int quantity, double unitCost,
@@ -44,7 +45,13 @@ public class IssuedItem {
     return this.issuedDate;
   }
 
-  public Date getIssuedLocalDate() {
+  public LocalDate getIssuedLocalDate() {
+    return this.issuedDate.toInstant()
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate();
+  }
+
+  public java.sql.Date getSqlDate() {
     return new java.sql.Date(this.issuedDate.getTime());
   }
 

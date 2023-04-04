@@ -175,7 +175,7 @@ public class DBStack<T> {
   }
 
   public Boolean isEmpty() {
-    return top == -1 || top == capacity - 1;
+    return top == null || top == capacity;
   }
 
   public Boolean isFull() {

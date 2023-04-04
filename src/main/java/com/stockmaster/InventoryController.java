@@ -72,7 +72,7 @@ public class InventoryController {
   private DBQueue<Item> meat = new DBQueue<Item>(5, "meat");
   private static ObservableList<Item> meatItems;
 
-  // Instanciate Stacks
+  // Instanciate Lists
   private DBList<Item> produce = new DBList<Item>("produce", Item.class);
   private static ObservableList<Item> produceItems;
   private DBList<Item> cleaners = new DBList<Item>("cleaners", Item.class);
@@ -110,6 +110,21 @@ public class InventoryController {
     categoryDropdown.setValue("All");
     categoryDropdown.valueProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
+        if (newValue == "All") {
+          nameColumn.setSortable(true);
+          categoryColumn.setSortable(true);
+          quantityColumn.setSortable(true);
+          soldColumn.setSortable(true);
+          sellingPriceColumn.setSortable(true);
+          vendorColumn.setSortable(true);
+        } else {
+          nameColumn.setSortable(false);
+          categoryColumn.setSortable(false);
+          quantityColumn.setSortable(false);
+          soldColumn.setSortable(false);
+          sellingPriceColumn.setSortable(false);
+          vendorColumn.setSortable(false);
+        }
         handleCategoryChange(newValue);
       }
     });
@@ -444,6 +459,7 @@ public class InventoryController {
       case "all":
         itemTableView.setItems(allItems);
         dataStructureInUse.setText("Multiple");
+
         break;
       default:
         itemTableView.setItems(null);
@@ -474,19 +490,19 @@ public class InventoryController {
     String table = selectedItem.getCategory().toLowerCase().split("/")[0].split(" ")[0];
     switch (table) {
       case "beverages":
-        beverageItems.set(selectedItem.getId(), updatedItem);
+        beverageItems.set(beverageItems.indexOf(selectedItem), updatedItem);
         table = "beverages";
         break;
       case "bakery":
-        bakeryItems.set(selectedItem.getId(), updatedItem);
+        bakeryItems.set(bakeryItems.indexOf(selectedItem), updatedItem);
         table = "bakery";
         break;
       case "canned":
-        cannedItems.set(selectedItem.getId(), updatedItem);
+        cannedItems.set(cannedItems.indexOf(selectedItem), updatedItem);
         table = "canned";
         break;
       case "dairy":
-        dairyItems.set(selectedItem.getId(), updatedItem);
+        dairyItems.set(dairyItems.indexOf(selectedItem), updatedItem);
         table = "dairy";
         break;
       case "dry":
@@ -594,6 +610,8 @@ public class InventoryController {
       if (allItems.get(i).getQuantity() < total)
         total = allItems.get(i).getQuantity();
     }
+    if (total == Integer.MAX_VALUE)
+      return 0;
     return total;
   }
 
@@ -614,5 +632,13 @@ public class InventoryController {
         total += allItems.get(i).getQuantity();
     }
     return total;
+  }
+
+  public static double getAmountSpent() {
+    double spent = 0;
+    for (Item item : allItems) {
+      spent += item.getQuantity() * item.getCostPrice();
+    }
+    return spent;
   }
 }

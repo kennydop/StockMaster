@@ -1,7 +1,13 @@
 package com.stockmaster;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -30,7 +36,7 @@ public class IssuedGoodsController {
   @FXML
   private TableColumn<IssuedItem, String> issuedGoodsIssuedToColumn;
   @FXML
-  private TableColumn<IssuedItem, String> issuedGoodsIssuedDateColumn;
+  private TableColumn<IssuedItem, LocalDate> issuedGoodsIssuedDateColumn;
   @FXML
   private TableColumn<IssuedItem, String> issuedGoodsSubTotalColumn;
   @FXML
@@ -49,7 +55,7 @@ public class IssuedGoodsController {
     issuedGoodsIssuedToColumn.prefWidthProperty().bind(issuedGoodsTableView.widthProperty().subtract(6).multiply(0.21));
     issuedGoodsIssuedDateColumn.prefWidthProperty()
         .bind(issuedGoodsTableView.widthProperty().subtract(6).multiply(0.18));
-    issuedGoodsSubTotalColumn.prefWidthProperty().bind(issuedGoodsTableView.widthProperty().subtract(6).multiply(0.12));
+    issuedGoodsSubTotalColumn.prefWidthProperty().bind(issuedGoodsTableView.widthProperty().subtract(6).multiply(0.11));
 
     // Set the cell value factories
     issuedGoodsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -138,6 +144,22 @@ public class IssuedGoodsController {
     return sales;
   }
 
+  public static List<Sale> getSalesData() {
+    List<Sale> sales = new ArrayList<>();
+    Map<Date, Integer> salesMap = new HashMap<>();
+    for (IssuedItem item : issuedGoodsList) {
+      Integer prevSold = salesMap.get(item.getIssuedDate());
+      if (prevSold == null)
+        prevSold = 0;
+      salesMap.put(item.getIssuedDate(), prevSold + item.getQuantity());
+    }
+    for (Map.Entry<Date, Integer> entry : salesMap.entrySet()) {
+      Sale sale = new Sale(entry.getKey(), entry.getValue());
+      sales.add(sale);
+    }
+    return sales;
+  }
+
   public static double getRevenue() {
     double revenue = 0;
     for (IssuedItem item : issuedGoodsList) {
@@ -152,5 +174,31 @@ public class IssuedGoodsController {
       customers.add(item.getIssuedTo());
     }
     return customers.size();
+  }
+
+  public static double getTotalCost() {
+    double totalCost = 0;
+    for (IssuedItem item : issuedGoodsList) {
+      totalCost += item.getQuantity() * InventoryController.searchForItem(item.getName()).getCostPrice();
+    }
+    return totalCost;
+  }
+}
+
+class Sale {
+  private Date date;
+  private int itemsSold;
+
+  public Sale(Date date, int itemsSold) {
+    this.date = date;
+    this.itemsSold = itemsSold;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public int getItemsSold() {
+    return itemsSold;
   }
 }
