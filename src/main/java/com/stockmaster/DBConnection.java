@@ -38,6 +38,7 @@ public class DBConnection {
       statement.executeUpdate(useDatabaseSql);
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error connecting to MySQL server", e.getMessage());
       System.err.println("Error connecting to MySQL server: " + e.getMessage());
     }
     return connection;
@@ -48,7 +49,8 @@ public class DBConnection {
       PreparedStatement stmt = connection.prepareStatement(cmd);
       stmt.executeUpdate();
     } catch (SQLException e) {
-      System.err.println("Error creating tables: " + e.getMessage());
+      ErrorDialog.showErrorDialog("Error", "Error Executing SQL", e.getMessage());
+      System.err.println("Error executing sql: " + e.getMessage());
     }
   }
 }

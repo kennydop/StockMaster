@@ -37,6 +37,7 @@ public class DBHashMap<K, V> {
       createTableStatement.execute(createTableQuery);
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Connecting to Database", e.getMessage());
       System.err.println("Error connecting to Database: " + e.getMessage());
       e.printStackTrace();
     }
@@ -64,6 +65,7 @@ public class DBHashMap<K, V> {
         insertStatement.executeUpdate();
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Putting " + key + " in Hashmap", e.getMessage());
       e.printStackTrace();
     }
 
@@ -84,6 +86,7 @@ public class DBHashMap<K, V> {
         return value;
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Getting from Hashmap", e.getMessage());
       e.printStackTrace();
     }
 
@@ -110,6 +113,7 @@ public class DBHashMap<K, V> {
         deleteStatement.executeUpdate();
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Removing from Hashmap", e.getMessage());
       e.printStackTrace();
     }
 
@@ -159,6 +163,8 @@ public class DBHashMap<K, V> {
         vendorsNames.add(_vendor.get("name"));
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Getting Items",
+          "An error occured while getting items: " + e.getMessage());
       e.printStackTrace();
     }
     return onlyNames ? vendorsNames : vendors;

@@ -5,11 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class LayoutController implements Initializable {
@@ -25,6 +28,8 @@ public class LayoutController implements Initializable {
   Button issuedGoodsBtn;
   @FXML
   Button billsBtn;
+  @FXML
+  private TextField searchTextField;
 
   private Node currentCenterNode; // the default center node for the dashboard
   private Node dashboardNode;
@@ -32,13 +37,20 @@ public class LayoutController implements Initializable {
   private Node vendorsNode;
   private Node issuedGoodsNode;
   private Node billsNode;
+  private Node searchNode;
+  @FXML
+  private SharedSearchModel sharedModel;
+
+  public LayoutController() {
+    this.sharedModel = SharedSearchModel.getInstance();
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     try {
       // load the dashboard node
-      FXMLLoader dasboardoader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-      dashboardNode = dasboardoader.load();
+      FXMLLoader dasboardloader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+      dashboardNode = dasboardloader.load();
 
       // load the inventory node
       FXMLLoader inventoryLoader = new FXMLLoader(getClass().getResource("inventory.fxml"));
@@ -56,14 +68,38 @@ public class LayoutController implements Initializable {
       FXMLLoader billsLoader = new FXMLLoader(getClass().getResource("bills.fxml"));
       billsNode = billsLoader.load();
 
+      // lo
+      FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("search.fxml"));
+      searchNode = searchLoader.load();
+
+      searchTextField.focusedProperty().addListener((ChangeListener<? super Boolean>) new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+          if (newValue) {
+            rootPane.setCenter(searchNode);
+            currentCenterNode = searchNode;
+            setClicked(null);
+          } else {
+          }
+        }
+      });
+
+      searchTextField.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+          sharedModel.setSearchQuery(newValue);
+        }
+      });
+
     } catch (IOException e) {
       // TODO Auto-generated catch block
+      ErrorDialog.showErrorDialog("Error", "FXML Error", "Error loading FXML files");
       e.printStackTrace();
     }
 
     // set the default center node
     rootPane.setCenter(dashboardNode);
-    dashboardBtn.getStyleClass().add("clicked");
+    setClicked(dashboardBtn);
     currentCenterNode = dashboardNode;
 
     // set the center swap and highlight for nav buttons
@@ -107,6 +143,7 @@ public class LayoutController implements Initializable {
     vendorsBtn.getStyleClass().remove("clicked");
     issuedGoodsBtn.getStyleClass().remove("clicked");
     billsBtn.getStyleClass().remove("clicked");
-    btn.getStyleClass().add("clicked");
+    if (btn != null)
+      btn.getStyleClass().add("clicked");
   }
 }

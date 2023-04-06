@@ -41,7 +41,7 @@
 }
 
 .round {
-  -fx-background-radius: 8;
+  -fx-background-radius: 6;
 }
 
 .bg-color {
@@ -76,12 +76,12 @@
   -fx-text-fill: #5a5a5a;
 }
 .text-3xl {
-  -fx-font-size: 2em;
+  -fx-font-size: 1.8em;
   -fx-font-weight: bold;
   -fx-text-fill: #5a5a5a;
 }
 .text-4xl {
-  -fx-font-size: 2.2em;
+  -fx-font-size: 2em;
   -fx-font-weight: bold;
   -fx-text-fill: #5a5a5a;
 }
@@ -99,7 +99,7 @@
   -fx-pref-width: 100;
   -fx-pref-height: 40;
   -fx-alignment: center;
-  -fx-background-radius: 5;
+  -fx-background-radius: 6;
   -fx-background-color: #ea7227;
   -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.1), 4, 0, 1, 1);
   -fx-font-weight: bold;
@@ -107,10 +107,10 @@
   -fx-text-fill: white;
 }
 .btn:hover {
-  -fx-background-color: #ea7227;
+  -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.25), 4, 0, 1, 1);
 }
 .btn:pressed {
-  -fx-background-color: #ed9820;
+  -fx-background-color: #ee8e53;
   -fx-pref-width: 98;
   -fx-pref-height: 38;
 }
@@ -119,15 +119,15 @@
   -fx-pref-width: 100;
   -fx-pref-height: 40;
   -fx-alignment: center;
-  -fx-background-radius: 5;
-  -fx-border-radius: 5;
+  -fx-background-radius: 6;
+  -fx-border-radius: 6;
   -fx-background-color: white;
   -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.1), 4, 0, 1, 1);
   -fx-font-weight: bold;
-  -fx-font-size: 1.1em;
+  -fx-font-size: 1em;
   -fx-text-fill: #f91d1d;
   -fx-border-color: #f91d1d;
-  -fx-border-width: 2;
+  -fx-border-width: 1;
 }
 
 .remove-btn:hover {
@@ -176,8 +176,8 @@
   -fx-background-color: #f5f5f5;
   -fx-border-color: #cccccc;
   -fx-border-width: 1;
-  -fx-border-radius: 5;
-  -fx-background-radius: 5;
+  -fx-border-radius: 6;
+  -fx-background-radius: 6;
   -fx-prompt-text-fill: #808080;
   -fx-font-size: 13px;
   -fx-padding: 5 10;
@@ -187,8 +187,8 @@
   -fx-background-color: #f5f5f5;
   -fx-border-color: #cccccc;
   -fx-border-width: 1;
-  -fx-border-radius: 5;
-  -fx-background-radius: 5;
+  -fx-border-radius: 6;
+  -fx-background-radius: 6;
   -fx-prompt-text-fill: #808080;
   -fx-font-size: 13px;
   -fx-padding: 1;
@@ -226,7 +226,7 @@
 .item-table-view .table-row-cell {
   -fx-border-width: 0;
   -fx-padding: 0;
-  -fx-cell-size: 30;
+  -fx-cell-size: 40;
   -fx-alignment: center-left;
   -fx-font-size: 1.1em;
   -fx-font-weight: 500;
@@ -255,7 +255,7 @@
 .date-picker {
   -fx-background-color: #f5f5f5;
   -fx-border-color: #cccccc;
-  -fx-border-radius: 5;
+  -fx-border-radius: 6;
   -fx-padding: 5;
 }
 

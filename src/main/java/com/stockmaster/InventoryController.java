@@ -196,7 +196,6 @@ public class InventoryController {
       Parent issueItemRoot = loader.load();
 
       IssueItemController issueItemController = loader.getController();
-      // System.out.println("selected item: \n" + selectedItem.toString());
       issueItemController.itemAlreadySelected(selectedItem);
       toIssue.setName(selectedItem.getName());
       toIssue.setCategory(selectedItem.getCategory());
@@ -219,8 +218,6 @@ public class InventoryController {
   }
 
   private void addItem(int index, Item item) {
-    System.out.println("adding " + item.getName() + " to " + item.getCategory().toLowerCase().split("/")[0]
-        .split(" ")[0]);
     switch (item.getCategory().toLowerCase().split("/")[0].split(" ")[0]) {
       case "beverages":
         beverages.push(item);
@@ -235,9 +232,7 @@ public class InventoryController {
         updateIndexes(bakeryItems);
         break;
       case "canned":
-        System.out.println("running...");
         canned.push(item);
-        System.out.println("pushed!");
         cannedItems.add(0, item);
         allItems.add(0, item);
         updateIndexes(cannedItems);
@@ -319,7 +314,7 @@ public class InventoryController {
         }
         break;
       default:
-        System.out.println("Category not supported");
+        ErrorDialog.showErrorDialog("Error", "Category Error", "Category not supported");
         break;
     }
     allItems.sorted();
@@ -329,8 +324,6 @@ public class InventoryController {
   private void removeItem() {
     if (selectedCategory == "All" || allItems.size() < 1)
       return;
-    System.out.println(
-        "removing item from " + selectedCategory.toLowerCase().toLowerCase().split("/")[0].split(" ")[0] + "...");
     Item removedItem = null;
     switch (selectedCategory.toLowerCase().toLowerCase().split("/")[0].split(" ")[0]) {
       case "beverages":
@@ -542,8 +535,8 @@ public class InventoryController {
         break;
       }
     }
-    IssuedGoodsController.issuedGoodsList.add(0, toIssue);
     IssuedGoodsController.issuedGoods.add(0, toIssue);
+    IssuedGoodsController.issuedGoodsList.add(0, toIssue);
     BillsController.generateBill(toIssue);
 
     DBConnection dbConnection = DBConnection.getInstance();
@@ -640,5 +633,17 @@ public class InventoryController {
       spent += item.getQuantity() * item.getCostPrice();
     }
     return spent;
+  }
+
+  public static ObservableList<Item> searchItemsByName(String query) {
+    if (query == null || query.isEmpty()) {
+      return allItems;
+    }
+
+    ObservableList<Item> filteredItems = allItems.stream()
+        .filter(item -> item.getName().toLowerCase().contains(query.toLowerCase()))
+        .collect(FXCollections::observableArrayList, ObservableList::add, ObservableList::addAll);
+
+    return filteredItems;
   }
 }

@@ -1,10 +1,8 @@
 package com.stockmaster;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -74,6 +72,8 @@ public class DBList<T> {
       }
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Connecting to Database",
+          "There was an error connecting to the database: " + e.getMessage());
       System.err.println("Error connecting to Database: " + e.getMessage());
       e.printStackTrace();
     }
@@ -85,6 +85,8 @@ public class DBList<T> {
 
   public void add(int index, T x) {
     if (index < 0 || index > size) {
+      ErrorDialog.showErrorDialog("Error", "Index Out of Bounds",
+          "The index " + index + " is out of bounds for the list of size " + size);
       throw new IndexOutOfBoundsException("Index out of bounds: " + index + " [" + size + "]");
     }
     addItem(x, index);
@@ -140,19 +142,26 @@ public class DBList<T> {
       insertStatement.executeUpdate();
       size++;
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Adding to Database", e.getMessage());
       e.printStackTrace();
     }
   }
 
   public T get(int index) {
     if (index < 0 || index >= size) {
+      ErrorDialog.showErrorDialog("Error", "Error Getting from Database",
+          "The index " + index + " is out of bounds for the list of size " + size);
       throw new IndexOutOfBoundsException("Index out of bounds: " + index);
     }
     return getItem(index);
   }
 
   public T remove(int index) {
-    if (index < 0 || index >= size) {
+    if (index == -1)
+      remove(size - 1);
+    if (index < -1 || index >= size) {
+      ErrorDialog.showErrorDialog("Error", "Error Removing from Database",
+          "The index " + index + " is out of bounds for the list of size " + size);
       throw new IndexOutOfBoundsException("Index out of bounds: " + index);
     }
     T removedItem = getItem(index);
@@ -170,6 +179,7 @@ public class DBList<T> {
       size--;
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Removing from Database", e.getMessage());
       e.printStackTrace();
     }
     return removedItem;
@@ -192,6 +202,8 @@ public class DBList<T> {
 
   public void set(int index, T element) {
     if (index < 0 || index >= size) {
+      ErrorDialog.showErrorDialog("Error", "Error Setting in Database",
+          "The index " + index + " is out of bounds for the list of size " + size);
       throw new IndexOutOfBoundsException("Index out of bounds: " + index);
     }
     setItem(index, element);
@@ -242,6 +254,7 @@ public class DBList<T> {
       PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
       updateStatement.executeUpdate();
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Inserting to Database", e.getMessage());
       e.printStackTrace();
     }
   }
@@ -292,6 +305,7 @@ public class DBList<T> {
 
         } catch (Exception e) {
           // TODO: handle exception
+          ErrorDialog.showErrorDialog("Error", "Error Getting Item", e.getMessage());
           e.printStackTrace();
         }
       }
@@ -357,6 +371,7 @@ public class DBList<T> {
       }
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "An error occured while getting items", e.getMessage());
       e.printStackTrace();
     }
     return items;

@@ -83,6 +83,7 @@ public class DBQueue<T> {
       }
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Connecting to Database", e.getMessage());
       System.err.println("Error connecting to Database: " + e.getMessage());
       e.printStackTrace();
     }
@@ -102,12 +103,14 @@ public class DBQueue<T> {
       PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
       updateStatement.executeUpdate();
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Enqueue Error", e.getMessage());
       e.printStackTrace();
     }
   }
 
   public T dequeue() {
     if (isEmpty()) {
+      ErrorDialog.showErrorDialog("Error", "Queue Empty", "The queue is empty");
       System.out.println("QUEUE EMPTY");
       System.exit(1);
     }
@@ -129,6 +132,7 @@ public class DBQueue<T> {
         shiftRows();
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Dequeue Error", e.getMessage());
       e.printStackTrace();
     }
 
@@ -147,6 +151,7 @@ public class DBQueue<T> {
       capacity *= 2;
     } catch (Exception e) {
       // TODO: handle exception
+      ErrorDialog.showErrorDialog("Error", "Expansion Error", e.getMessage());
       System.out.println("Expansion failed: " + e.getMessage());
       e.printStackTrace();
     }
@@ -235,6 +240,7 @@ public class DBQueue<T> {
 
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Getting Items", e.getMessage());
       e.printStackTrace();
     }
     return items;

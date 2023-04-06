@@ -75,6 +75,8 @@ public class DBStack<T> {
       }
 
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error connecting to Database",
+          "Error connecting to Database: " + e.getMessage());
       System.err.println("Error connecting to Database: " + e.getMessage());
       e.printStackTrace();
     }
@@ -94,6 +96,7 @@ public class DBStack<T> {
       PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
       updateStatement.executeUpdate();
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Push Error", "There was an error pushing to stack");
       e.printStackTrace();
     }
   }
@@ -101,7 +104,7 @@ public class DBStack<T> {
   public T pop() {
     if (isEmpty()) {
       System.out.println("STACK EMPTY");
-      System.exit(1);
+      ErrorDialog.showErrorDialog("Error", "Pop Error", "Stack is empty");
     }
 
     T poppedItem = null;
@@ -166,6 +169,8 @@ public class DBStack<T> {
     } catch (Exception e) {
       // TODO: handle exception
       System.out.println("Expansion failed: " + e.getMessage());
+      ErrorDialog.showErrorDialog("Error", "Stack Expansion Failed",
+          "There was an error expanding the stack: " + e.getMessage());
       e.printStackTrace();
     }
   }
@@ -209,6 +214,8 @@ public class DBStack<T> {
 
       }
     } catch (SQLException e) {
+      ErrorDialog.showErrorDialog("Error", "Error Getting Items",
+          "An error occured while getting items: " + e.getMessage());
       e.printStackTrace();
     }
     return items;

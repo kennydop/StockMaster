@@ -1,11 +1,5 @@
 package com.stockmaster;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,9 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 public class BillsController {
   @FXML
@@ -35,8 +26,6 @@ public class BillsController {
 
   public static DBList<Bill> bills = new DBList<>("bills", Bill.class);
   public static ObservableList<Bill> billsList = FXCollections.observableArrayList();
-  private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormatter.ofPattern("yyMMddHHmmss");
-  private static final Random RANDOM = new Random();
 
   public void initialize() {
     // Set the percentage widths for the columns

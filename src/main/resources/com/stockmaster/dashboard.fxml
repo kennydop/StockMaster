@@ -7,6 +7,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,14 +15,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/19"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.DashboardController">
+<ScrollPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.DashboardController">
   <content>
     <VBox spacing="5.0">
       <children>
         <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="15.0" stylesheets="@styles.css">
-          <StackPane prefWidth="280.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css" GridPane.rowIndex="1">
-            <VBox>
+          <StackPane prefWidth="300.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css" GridPane.rowIndex="1">
+            <VBox prefWidth="281.0">
               <children>
                 <Label prefHeight="17.0" prefWidth="280.0" stylesheets="@styles.css" text="Sales Overview">
                   <styleClass>
@@ -46,6 +46,7 @@
                       <children>
                         <Label styleClass="text" stylesheets="@styles.css" text="Sales" />
                         <Label fx:id="sales" styleClass="text-4xl" stylesheets="@styles.css" text="..." />
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" />
                       </children>
                     </VBox>
                     <VBox layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -76,7 +77,7 @@
               <String fx:value="card" />
             </styleClass>
           </StackPane>
-          <StackPane layoutX="20.0" layoutY="20.0" prefWidth="280.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
+          <StackPane layoutX="20.0" layoutY="20.0" prefWidth="300.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
             <children>
               <VBox>
                 <children>
@@ -134,7 +135,7 @@
               <String fx:value="card" />
             </styleClass>
           </StackPane>
-          <StackPane layoutX="270.0" layoutY="10.0" prefWidth="280.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
+          <StackPane layoutX="270.0" layoutY="10.0" prefWidth="300.0" style="-fx-background-color: white; -fx-padding: 20;" stylesheets="@styles.css">
             <children>
               <VBox>
                 <children>
@@ -198,7 +199,7 @@
         </HBox>
         <HBox spacing="15.0">
           <children>
-            <StackPane prefWidth="280.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+            <StackPane prefWidth="300.0" style="-fx-background-color: white;" stylesheets="@styles.css">
               <styleClass>
                 <String fx:value="round" />
                 <String fx:value="shadow" />
@@ -206,13 +207,13 @@
               </styleClass>
               <children>
                 <Label styleClass="text" text="Total Vendors" StackPane.alignment="CENTER_LEFT" />
-                <Label fx:id="totalVendor" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+                <Label fx:id="totalVendor" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="..." StackPane.alignment="CENTER_RIGHT" />
               </children>
               <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
               </padding>
             </StackPane>
-            <StackPane prefWidth="280.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+            <StackPane prefWidth="300.0" style="-fx-background-color: white;" stylesheets="@styles.css">
               <styleClass>
                 <String fx:value="round" />
                 <String fx:value="shadow" />
@@ -220,13 +221,13 @@
               </styleClass>
               <children>
                 <Label styleClass="text" text="Total Customers" StackPane.alignment="CENTER_LEFT" />
-                <Label fx:id="totalCustomers" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+                <Label fx:id="totalCustomers" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="..." StackPane.alignment="CENTER_RIGHT" />
               </children>
               <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
               </padding>
             </StackPane>
-            <StackPane prefWidth="280.0" style="-fx-background-color: white;" stylesheets="@styles.css">
+            <StackPane prefWidth="300.0" style="-fx-background-color: white;" stylesheets="@styles.css">
               <styleClass>
                 <String fx:value="round" />
                 <String fx:value="shadow" />
@@ -234,7 +235,7 @@
               </styleClass>
               <children>
                 <Label styleClass="text" text="Total Suppliers" StackPane.alignment="CENTER_LEFT" />
-                <Label fx:id="totalSuppliers" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="123" StackPane.alignment="CENTER_RIGHT" />
+                <Label fx:id="totalSuppliers" layoutX="15.0" layoutY="21.0" styleClass="text-lg-label" stylesheets="@styles.css" text="..." StackPane.alignment="CENTER_RIGHT" />
               </children>
               <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

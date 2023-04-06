@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stockmaster.SearchController">
+  <TableView fx:id="itemTableView" styleClass="item-table-view" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
+    <columns>
+      <TableColumn fx:id="nameColumn" editable="false" resizable="false" sortable="false" text="Name" />
+      <TableColumn fx:id="categoryColumn" editable="false" resizable="false" sortable="false" text="Category" />
+      <TableColumn fx:id="quantityColumn" editable="false" resizable="false" sortable="false" text="Quantity" />
+      <TableColumn fx:id="soldColumn" editable="false" resizable="false" sortable="false" text="Sold" />
+      <TableColumn fx:id="sellingPriceColumn" editable="false" resizable="false" sortable="false" text="Selling Price" />
+      <TableColumn fx:id="vendorColumn" editable="false" resizable="false" sortable="false" text="Vendor" />
+    </columns>
+    <VBox.margin>
+      <Insets top="5.0" />
+    </VBox.margin>
+  </TableView>
+  <padding>
+    <Insets left="20.0" right="20.0" top="20.0" />
+  </padding>
+</VBox>

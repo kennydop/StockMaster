@@ -32,7 +32,7 @@
     <columns>
       <TableColumn fx:id="invoiceNumberColumn" editable="false" resizable="false" sortable="false" text="Invoice Code" />
       <TableColumn fx:id="issuedToColumn" editable="false" resizable="false" sortable="false" text="Issued To" />
-      <TableColumn fx:id="totalAmountColumn" editable="false" resizable="false" sortable="false" text="Amount Payed" />
+      <TableColumn fx:id="totalAmountColumn" editable="false" resizable="false" sortable="false" text="Amount Paid" />
       <TableColumn fx:id="issuedDateColumn" editable="false" resizable="false" sortable="false" text="Date Issued" />
     </columns>
     <VBox.margin>
