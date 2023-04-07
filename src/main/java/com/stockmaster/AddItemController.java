@@ -36,9 +36,9 @@ public class AddItemController {
 
     // get vendors
     ObservableList<String> options = VendorsController.vendorNames;
-    options.add("Self");
+
     // Set the options to the ComboBox
-    vendorDropdown.setItems(options);
+    vendorDropdown.getItems().addAll(options);
   }
 
   @FXML

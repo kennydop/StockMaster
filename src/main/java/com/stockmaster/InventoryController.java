@@ -110,21 +110,6 @@ public class InventoryController {
     categoryDropdown.setValue("All");
     categoryDropdown.valueProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
-        if (newValue == "All") {
-          nameColumn.setSortable(true);
-          categoryColumn.setSortable(true);
-          quantityColumn.setSortable(true);
-          soldColumn.setSortable(true);
-          sellingPriceColumn.setSortable(true);
-          vendorColumn.setSortable(true);
-        } else {
-          nameColumn.setSortable(false);
-          categoryColumn.setSortable(false);
-          quantityColumn.setSortable(false);
-          soldColumn.setSortable(false);
-          sellingPriceColumn.setSortable(false);
-          vendorColumn.setSortable(false);
-        }
         handleCategoryChange(newValue);
       }
     });

@@ -106,10 +106,7 @@
           <ComboBox fx:id="vendorDropdown" prefWidth="300.0" styleClass="other-txt-field" stylesheets="@styles.css" GridPane.columnIndex="1" GridPane.rowIndex="8">
             <items>
               <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Vendor 1" />
-                <String fx:value="Vendor 2" />
-                <String fx:value="Vendor 3" />
-                <!-- Add more vendors as needed -->
+                <String fx:value="Self" />
               </FXCollections>
             </items>
           </ComboBox>
